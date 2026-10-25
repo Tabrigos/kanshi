@@ -15,6 +15,16 @@
   --k-color-warning: #ff9a1f;
   --k-color-critical: #ff3a2e;
   --k-color-on-critical: #040506; /** Text set on a critical fill, such as an alarm hexagon */
+  --k-motion-duration-tick: 60ms; /** A counter stepping to its next value */
+  --k-motion-duration-step: 90ms; /** One segment of a bar lighting up or going dark */
+  --k-motion-duration-swap: 110ms; /** A shape changing state: tone, fill, border */
+  --k-motion-duration-draw: 140ms; /** A line or a new log entry appearing */
+  --k-motion-duration-lock: 180ms; /** A marker settling on its target */
+  --k-motion-duration-sweep: 260ms; /** A scan passing over a panel */
+  --k-motion-duration-trace: 520ms; /** A plot drawing its whole line */
+  --k-motion-duration-blink: 1000ms; /** Period of an alarm blink: one flash per second, under the WCAG 2.3.1 limit of three */
+  --k-motion-easing-linear: cubic-bezier(0, 0, 1, 1); /** Scans, sweeps and anything that moves at machine speed */
+  --k-motion-easing-out: cubic-bezier(0, 0, 0.2, 1); /** Arrivals: fast start, settles without overshoot */
   --k-space-1: 4px;
   --k-space-2: 8px;
   --k-space-3: 12px;
@@ -24,7 +34,6 @@
   --k-frame-line: 1px; /** Panel border */
   --k-frame-corner: 10px; /** Length of the bright corner marks of a panel */
   --k-frame-grid: 48px; /** Cell of the background grid */
-  --k-motion-blink: 1000ms; /** Period of an alarm blink: one flash per second, under the WCAG 2.3.1 limit of three */
   --k-font-family-display: 'Kanshi Matisse', 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
   --k-font-family-ui: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Neue', sans-serif;
   --k-font-family-data: 'M PLUS 1 Code', ui-monospace, 'Cascadia Mono', monospace;

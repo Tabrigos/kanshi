@@ -1,0 +1,24 @@
+{
+  "motion": {
+    "$description": "Machine motion: short, linear or decelerating, never elastic. Motion reveals a change of state; it never carries meaning that the still state does not show. Under prefers-reduced-motion every duration but `blink` drops to 0 ms (src/base.css).",
+    "duration": {
+      "$type": "duration",
+      "tick": { "$value": { "value": 60, "unit": "ms" }, "$description": "A counter stepping to its next value" },
+      "step": { "$value": { "value": 90, "unit": "ms" }, "$description": "One segment of a bar lighting up or going dark" },
+      "swap": { "$value": { "value": 110, "unit": "ms" }, "$description": "A shape changing state: tone, fill, border" },
+      "draw": { "$value": { "value": 140, "unit": "ms" }, "$description": "A line or a new log entry appearing" },
+      "lock": { "$value": { "value": 180, "unit": "ms" }, "$description": "A marker settling on its target" },
+      "sweep": { "$value": { "value": 260, "unit": "ms" }, "$description": "A scan passing over a panel" },
+      "trace": { "$value": { "value": 520, "unit": "ms" }, "$description": "A plot drawing its whole line" },
+      "blink": {
+        "$value": { "value": 1000, "unit": "ms" },
+        "$description": "Period of an alarm blink: one flash per second, under the WCAG 2.3.1 limit of three"
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "linear": { "$value": [0, 0, 1, 1], "$description": "Scans, sweeps and anything that moves at machine speed" },
+      "out": { "$value": [0, 0, 0.2, 1], "$description": "Arrivals: fast start, settles without overshoot" }
+    }
+  }
+}

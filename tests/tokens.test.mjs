@@ -1,23 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { buildTokenFiles, root } from '../scripts/tokens.mjs';
 import { contrastPromises } from '../scripts/contrast.mjs';
-
-async function tokenTree() {
-  const dir = path.join(root, 'tokens');
-  const names = (await readdir(dir)).filter((name) => name.endsWith('.tokens.json'));
-  assert.ok(names.length >= 3, `expected the three token files, found ${names.length}`);
-  const tree = {};
-  for (const name of names) {
-    for (const [group, value] of Object.entries(JSON.parse(await readFile(path.join(dir, name), 'utf8')))) {
-      assert.ok(!(group in tree), `group ${group} is defined in two token files`);
-      tree[group] = value;
-    }
-  }
-  return tree;
-}
+import { tokenTree } from './token-tree.mjs';
 
 test('every committed generated file is exactly what the tokens produce', async () => {
   const files = await buildTokenFiles();

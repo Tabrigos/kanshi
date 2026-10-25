@@ -33,6 +33,8 @@
   border: var(--k-frame-line) solid var(--k-color-accent);
   padding: 7px 12px;
   cursor: pointer;
+  transition: background-color var(--k-motion-duration-tick) var(--k-motion-easing-linear),
+    color var(--k-motion-duration-tick) var(--k-motion-easing-linear);
 }
 .k-button:hover { background: var(--k-tint-accent); }
 .k-button[aria-pressed="true"] { background: var(--k-color-accent); color: var(--k-color-on-accent); }
@@ -147,7 +149,7 @@
 
 /* ——— hex grid: zones as hexagons, in three states ——— */
 .k-hexgrid { width: 100%; max-width: 100%; height: auto; }
-.k-hex polygon { fill: none; stroke: var(--k-color-accent); stroke-width: 2; }
+.k-hex polygon { fill: transparent; stroke: var(--k-color-accent); stroke-width: 2; transition: fill var(--k-motion-duration-swap) var(--k-motion-easing-linear), stroke var(--k-motion-duration-swap) var(--k-motion-easing-linear); }
 .k-hex text { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 22px; text-anchor: middle; fill: var(--k-color-accent); }
 .k-hex .k-hex-sub { font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); font-size: 11px; letter-spacing: 0.12em; }
 .k-hex[data-state="off"] polygon { stroke: var(--k-color-border); stroke-dasharray: 4 4; }
@@ -157,7 +159,7 @@
 
 /* ——— vote: three voters and a verdict ——— */
 .k-vote { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--k-space-2); }
-.k-voter { display: grid; justify-items: start; gap: 4px; min-width: 0; padding: var(--k-space-2); border: var(--k-frame-line) solid var(--k-color-border); }
+.k-voter { display: grid; justify-items: start; gap: 4px; min-width: 0; padding: var(--k-space-2); border: var(--k-frame-line) solid var(--k-color-border); transition: border-color var(--k-motion-duration-swap) var(--k-motion-easing-linear), background-color var(--k-motion-duration-swap) var(--k-motion-easing-linear), color var(--k-motion-duration-swap) var(--k-motion-easing-linear); }
 .k-voter-sign { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 2.4rem; line-height: 1; transform: scaleX(0.8); transform-origin: left; }
 .k-voter-name { font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); color: var(--k-color-text-dim); }
 .k-voter[data-vote="yes"] { border-color: var(--k-color-ok); color: var(--k-color-ok); }
@@ -171,7 +173,7 @@
 .k-countdown small { font-size: 0.45em; }
 .k-countdown[data-low] { color: var(--k-color-critical); }
 .k-segments { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; height: 16px; }
-.k-segments > * { background: var(--k-color-border); opacity: 0.35; }
+.k-segments > * { background: var(--k-color-border); opacity: 0.35; transition: background-color var(--k-motion-duration-step) var(--k-motion-easing-linear), opacity var(--k-motion-duration-step) var(--k-motion-easing-linear); }
 .k-segments > [data-on] { background: var(--k-color-accent); opacity: 1; }
 .k-segments[data-low] > [data-on] { background: var(--k-color-critical); }
 
@@ -196,7 +198,7 @@
 /* ——— log: newest line at the bottom, in full color ——— */
 .k-log { display: flex; flex-direction: column; justify-content: flex-end; min-height: 13.2em; overflow: hidden; font-family: var(--k-font-family-data); font-size: 0.8rem; line-height: 1.65; }
 .k-log > * { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--k-color-text-dim); }
-.k-log > [data-newest] { color: var(--k-color-text); }
+.k-log > [data-newest] { color: var(--k-color-text); animation: k-reveal var(--k-motion-duration-draw) var(--k-motion-easing-out); }
 .k-log-tag { display: inline-block; min-width: 7ch; color: var(--k-color-accent); }
 
 /* ——— table ——— */

@@ -66,6 +66,27 @@ body {
 }
 @media (prefers-reduced-motion: no-preference) {
   .k-running .k-blink {
-    animation: k-blink var(--k-motion-blink) steps(1) infinite;
+    animation: k-blink var(--k-motion-duration-blink) steps(1) infinite;
   }
+}
+
+/* Less motion: every transition becomes instant, so a change of state is
+   still seen, just not animated. The blink is not a transition: it stops
+   (above). A test keeps this list complete. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --k-motion-duration-tick: 0ms;
+    --k-motion-duration-step: 0ms;
+    --k-motion-duration-swap: 0ms;
+    --k-motion-duration-draw: 0ms;
+    --k-motion-duration-lock: 0ms;
+    --k-motion-duration-sweep: 0ms;
+    --k-motion-duration-trace: 0ms;
+  }
+}
+
+/* A new entry arrives: clipped in from the left, like a line being typed. */
+@keyframes k-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
 }
