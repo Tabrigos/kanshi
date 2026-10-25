@@ -20,8 +20,10 @@
   // ——— controls ———
   const buttonFx = document.getElementById('button-fx');
   const buttonPause = document.getElementById('button-pause');
+  // CRT effects are off by default: whoever wants them turns them on, and the
+  // choice is remembered in this browser.
   try {
-    if (localStorage.getItem('kanshi.fx') === 'off') { root.classList.remove('k-fx'); buttonFx.setAttribute('aria-pressed', 'false'); }
+    if (localStorage.getItem('kanshi.fx') === 'on') { root.classList.add('k-fx'); buttonFx.setAttribute('aria-pressed', 'true'); }
   } catch (error) { /* storage blocked: the default stays */ }
   buttonFx.addEventListener('click', () => {
     const on = root.classList.toggle('k-fx');

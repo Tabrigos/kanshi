@@ -62,7 +62,8 @@ Kanshi uses it only when it is already installed on the viewer's machine.
   `k-running`, so a page can offer a pause (WCAG 2.2.2).
 - Every endless animation (blink, ticker) waits for both gates, and a test
   fails on one that does not.
-- Scanlines and glow sit behind the `k-fx` class, so they can be switched off.
+- Scanlines and glow sit behind the `k-fx` class: off unless the page opts
+  in. The demo starts without them and offers a switch.
 
 ## Not affiliated
 
