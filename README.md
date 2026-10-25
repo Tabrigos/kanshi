@@ -25,8 +25,8 @@ to tell you what is happening.
   background grid (`k-grid-bg`) and CRT layer (`k-fx` on the root), and the
   blink that stops when asked.
 - **`src/components.css`**: framework-free shapes, such as panel, tab, button,
-  chip, metric, hazard band, title card, hex grid, vote, countdown, chart, log
-  and table.
+  chip, LED, ticker, metric, hazard band, title card, hex grid, vote,
+  countdown, chart, log and table.
 - **`demo/index.html`**: every shape on one screen with moving sample data.
   Open it straight from the file system, or [online](https://tabrigos.github.io/kanshi/).
 
@@ -60,6 +60,8 @@ Kanshi uses it only when it is already installed on the viewer's machine.
 - Alarms blink once per second, under the three-flashes limit of WCAG 2.3.1,
   only without `prefers-reduced-motion`, and only while the root carries
   `k-running`, so a page can offer a pause (WCAG 2.2.2).
+- Every endless animation (blink, ticker) waits for both gates, and a test
+  fails on one that does not.
 - Scanlines and glow sit behind the `k-fx` class, so they can be switched off.
 
 ## Not affiliated

@@ -25,6 +25,51 @@ export function propertiesUsed(css) {
   return new Set([...withoutComments(css).matchAll(/var\(\s*(--k-[\w-]+)/g)].map((match) => match[1]));
 }
 
+/**
+ * Every rule of a stylesheet with the at-rule preludes around it, enough to
+ * tell where a declaration lives. Not a full parser: it relies on balanced
+ * braces, which the stylesheets of this repo have.
+ * @returns {{ selector: string, body: string, within: string[], line: number }[]}
+ */
+export function rules(css) {
+  const text = withoutComments(css);
+  const found = [];
+  const stack = [];
+  let start = 0;
+  for (let index = 0; index < text.length; index++) {
+    if (text[index] === '{') {
+      stack.push({ prelude: text.slice(start, index).trim(), open: index });
+      start = index + 1;
+    } else if (text[index] === '}') {
+      const block = stack.pop();
+      if (block && !block.prelude.startsWith('@')) {
+        found.push({
+          selector: block.prelude,
+          body: text.slice(block.open + 1, index),
+          within: stack.map((outer) => outer.prelude),
+          line: lineOf(text, block.open),
+        });
+      }
+      start = index + 1;
+    } else if (text[index] === ';' && stack.length === 0) {
+      start = index + 1;
+    }
+  }
+  return found;
+}
+
+/**
+ * Rules that start an endless animation without the two gates WCAG asks for:
+ * the viewer's motion preference (2.3.3) and the page's pause switch (2.2.2).
+ * @returns {{ selector: string, line: number }[]}
+ */
+export function ungatedLoops(css) {
+  return rules(css)
+    .filter((rule) => /\banimation\s*:[^;]*\binfinite\b|animation-iteration-count\s*:\s*infinite/.test(rule.body))
+    .filter((rule) => !(rule.within.some((prelude) => /prefers-reduced-motion:\s*no-preference/.test(prelude)) && /\.k-running\b/.test(rule.selector)))
+    .map(({ selector, line }) => ({ selector, line }));
+}
+
 /** @returns {Set<string>} the `--k-*` names given a value */
 export function propertiesDefined(css) {
   return new Set([...withoutComments(css).matchAll(/(--k-[\w-]+)\s*:/g)].map((match) => match[1]));

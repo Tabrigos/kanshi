@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { root } from '../scripts/tokens.mjs';
-import { literalColors, propertiesDefined, propertiesUsed } from '../scripts/css-guard.mjs';
+import { literalColors, propertiesDefined, propertiesUsed, ungatedLoops } from '../scripts/css-guard.mjs';
 
 async function stylesheets() {
   const files = [];
@@ -34,6 +34,25 @@ test('the guard sees a property that nobody defines', () => {
   const used = propertiesUsed('a { color: var(--k-color-txet) }');
   const defined = propertiesDefined(':root { --k-color-text: #fff }');
   assert.deepEqual([...used].filter((name) => !defined.has(name)), ['--k-color-txet']);
+});
+
+test('the loop guard sees an endless animation without its gates, and accepts a gated one', () => {
+  const css = [
+    '.a { animation: spin 1s linear infinite; }',
+    '@media (prefers-reduced-motion: no-preference) { .b { animation: spin 1s infinite; } }',
+    '@media (prefers-reduced-motion: no-preference) { .k-running .c { animation: spin 1s infinite; } }',
+    '.k-running .d { animation: spin 1s infinite; }',
+    '.e { animation: fade 1s ease-out; }',
+  ].join('\n');
+  assert.deepEqual(ungatedLoops(css).map((rule) => rule.selector), ['.a', '.b', '.k-running .d']);
+});
+
+test('every endless animation waits for the motion preference and the pause switch', async () => {
+  const files = (await stylesheets()).filter((file) => file.name.startsWith('src/'));
+  const loops = files.flatMap((file) => ungatedLoops(file.css).map((rule) => `${file.name}:${rule.line} ${rule.selector}`));
+  assert.deepEqual(loops, []);
+  const gated = files.map((file) => file.css).join('\n').match(/\binfinite\b/g) ?? [];
+  assert.ok(gated.length >= 2, `expected the blink and the ticker loops, found ${gated.length}`);
 });
 
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {

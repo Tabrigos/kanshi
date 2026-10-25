@@ -74,7 +74,9 @@ at phone width: the tests read CSS text, they do not see layout.
 - **Every `--k-*` property used is defined** by tokens.css or by a stylesheet.
 - **Motion**: anything that blinks uses `k-blink`, so it obeys
   `prefers-reduced-motion` and the `k-running` switch. No more than three
-  flashes per second, ever.
+  flashes per second, ever. Any other endless animation sits inside
+  `@media (prefers-reduced-motion: no-preference)` with `.k-running` in its
+  selector: `tests/css.test.mjs` fails otherwise.
 - **No borrowed property**: no logos, characters, names or quoted text from
   any series, in code, demo or documents. Matisse is never shipped or
   downloaded, only named in `local()`.

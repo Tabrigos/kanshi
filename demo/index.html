@@ -19,6 +19,7 @@
     <div class="brand">
       <span class="k-tab">Kanshi</span>
       <small><span lang="ja">監視</span> · DEMO 0.0 · SAMPLE DATA</small>
+      <span class="link"><span class="k-led k-tone-ok"></span>LINK</span>
     </div>
     <div class="controls">
       <span class="clock k-glow" id="clock" aria-label="Local time">--:--:--</span>
@@ -27,6 +28,13 @@
       <button type="button" class="k-button" id="button-pause" aria-pressed="false">Pause</button>
     </div>
   </header>
+
+  <div class="k-ticker" role="marquee" aria-label="Status feed">
+    <div class="k-ticker-track">
+      <span>SYNC OK 12 MIN AGO · INBOX 9 NOTES TO SORT · AUDIT 13/15, CONTAINER DOWN DURING THE CHECK · NEXT BRIEF 07:00 · SKILL EVALS 58/58 · LOCK FREE · <span lang="ja">異常なし</span> ·</span>
+      <span aria-hidden="true">SYNC OK 12 MIN AGO · INBOX 9 NOTES TO SORT · AUDIT 13/15, CONTAINER DOWN DURING THE CHECK · NEXT BRIEF 07:00 · SKILL EVALS 58/58 · LOCK FREE · <span lang="ja">異常なし</span> ·</span>
+    </div>
+  </div>
 
   <section class="k-titlecard titlecard" aria-label="Title card">
     <svg viewBox="0 0 1000 330" role="img" aria-label="監視, Kanshi, monitoring interface">
@@ -131,11 +139,11 @@
           <table class="k-table">
             <thead><tr><th>Service</th><th>State</th><th>Up for</th><th>Last event</th></tr></thead>
             <tbody>
-              <tr><td>dashboard</td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>brief written at 07:02</td></tr>
-              <tr><td>notes app</td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>vault mounted</td></tr>
-              <tr><td>hourly sync</td><td><span class="k-chip k-tone-ok">Ok</span></td><td>—</td><td>committed 4 files</td></tr>
-              <tr><td>morning brief</td><td><span class="k-chip k-tone-ok">Ok</span></td><td>—</td><td>today's note created</td></tr>
-              <tr><td>weekly audit</td><td><span class="k-chip k-tone-critical">Error</span></td><td>—</td><td>container down during the check</td></tr>
+              <tr><td><span class="service"><span class="k-led k-tone-ok"></span>dashboard</span></td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>brief written at 07:02</td></tr>
+              <tr><td><span class="service"><span class="k-led k-tone-ok"></span>notes app</span></td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>vault mounted</td></tr>
+              <tr><td><span class="service"><span class="k-led k-tone-ok"></span>hourly sync</span></td><td><span class="k-chip k-tone-ok">Ok</span></td><td>—</td><td>committed 4 files</td></tr>
+              <tr><td><span class="service"><span class="k-led k-tone-warning" data-off></span>morning brief</span></td><td><span class="k-chip k-tone-warning">Idle</span></td><td>—</td><td>next run at 07:00</td></tr>
+              <tr><td><span class="service"><span class="k-led k-tone-critical k-blink"></span>weekly audit</span></td><td><span class="k-chip k-tone-critical">Error</span></td><td>—</td><td>container down during the check</td></tr>
             </tbody>
           </table>
         </div>

@@ -11,6 +11,8 @@ body {
 .topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-3); padding-bottom: var(--k-space-3); border-bottom: var(--k-frame-line) solid var(--k-color-border); }
 .brand { display: flex; align-items: center; gap: var(--k-space-3); }
 .brand small { font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); color: var(--k-color-text-dim); }
+.link, .service { display: inline-flex; align-items: center; gap: var(--k-space-2); }
+.link { font-weight: var(--k-font-weight-ui); font-size: var(--k-font-size-caption); letter-spacing: var(--k-font-tracking-label); color: var(--k-color-text-dim); }
 .controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2); }
 .clock { min-width: 8ch; font-family: var(--k-font-family-data); font-variant-numeric: tabular-nums; color: var(--k-color-accent); }
 

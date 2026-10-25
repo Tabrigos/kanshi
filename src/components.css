@@ -119,6 +119,60 @@
 }
 .k-chip::before { content: ""; width: 7px; height: 7px; background: currentColor; }
 
+/* ——— led: a square lamp in the color of its tone (accent by default).
+   `data-off` shows the lamp unlit; `k-blink` makes it blink, gated like
+   every blink. It sits next to words that say the state: color alone never
+   carries it. ——— */
+.k-led {
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  color: var(--k-color-accent);
+  background: currentColor;
+  box-shadow: 0 0 6px color-mix(in srgb, currentColor 60%, transparent);
+  transition: background-color var(--k-motion-duration-swap) var(--k-motion-easing-linear), box-shadow var(--k-motion-duration-swap) var(--k-motion-easing-linear);
+}
+.k-led.k-tone-ok { color: var(--k-color-ok); }
+.k-led.k-tone-warning { color: var(--k-color-warning); }
+.k-led.k-tone-critical { color: var(--k-color-critical); }
+.k-led[data-off] {
+  background: transparent;
+  box-shadow: inset 0 0 0 var(--k-frame-line) currentColor;
+}
+
+/* ——— ticker: a band of text running right to left. The content is written
+   twice (the copy aria-hidden) so the loop has no seam. It runs only while
+   the root carries `k-running` and the viewer has not asked for less motion,
+   and it stops under the pointer or the focus; otherwise it stands still and
+   is cut at the edge. Its duration is a speed, not a transition: set
+   `--k-ticker-duration` on the ticker for longer or shorter content. ——— */
+.k-ticker {
+  --k-ticker-duration: 40s;
+  overflow: hidden;
+  border-block: var(--k-frame-line) solid var(--k-color-border);
+  background: var(--k-color-surface);
+  font-family: var(--k-font-family-data);
+  font-size: var(--k-font-size-caption);
+  color: var(--k-color-accent);
+  white-space: nowrap;
+}
+.k-ticker-track { display: flex; width: max-content; }
+.k-ticker-track > * { padding: 6px var(--k-space-5) 6px 0; }
+@keyframes k-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .k-running .k-ticker-track {
+    animation: k-ticker var(--k-ticker-duration) linear infinite;
+  }
+  .k-running .k-ticker:hover .k-ticker-track,
+  .k-running .k-ticker:focus-within .k-ticker-track {
+    animation-play-state: paused;
+  }
+}
+
 /* ——— hazard: diagonal stripes around a short notice ——— */
 .k-hazard {
   display: flex;
