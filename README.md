@@ -18,6 +18,9 @@ to tell you what is happening.
   (`tokens/*.tokens.json`): the single source. Colors come in two layers, a raw
   `palette` and the `color` roles that components use.
 - **`src/tokens.css`**, generated from the tokens as `--k-*` custom properties.
+- **Emergency mode**: `data-mode="emergency"` on the root element turns the
+  signal color and the frames red, keeping every contrast promise.
+  [See it](https://tabrigos.github.io/kanshi/demo/#emergency).
 - **`src/base.css`**: page defaults, the free font stack, focus, an optional
   background grid (`k-grid-bg`) and CRT layer (`k-fx` on the root), and the
   blink that stops when asked.

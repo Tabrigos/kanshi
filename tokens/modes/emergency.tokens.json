@@ -1,0 +1,9 @@
+{
+  "color": {
+    "$description": "Emergency mode, turned on by data-mode=\"emergency\" on the root element: the signal color turns red and the frames follow, while ok, warning and critical keep their meaning. Only color roles change; every contrast promise of the base roles must still hold.",
+    "surface": { "$value": "{palette.panel-alarm}" },
+    "border": { "$value": "{palette.red-dim}" },
+    "text-dim": { "$value": "{palette.red-soft}" },
+    "accent": { "$value": "{palette.red}" }
+  }
+}

@@ -13,7 +13,9 @@ plancia-ui.
 
 ```
 tokens/*.tokens.json   SINGLE SOURCE (DTCG 2025.10): palette (raw) and color roles, type, space, motion
-src/tokens.css         GENERATED from the tokens (npm run tokens); committed
+tokens/modes/          one file per mode (emergency): it redefines existing color roles, nothing else
+src/tokens.css         GENERATED from the tokens (npm run tokens); committed. :root, then one
+                       :root[data-mode="<name>"] block per mode with only the roles it redefines
 src/base.css           page defaults, Matisse via local() only, focus, k-grid-bg, k-fx, blink rules
 src/components.css     the k-* shapes; no page layout
 demo/                  the demo page: its own layout (demo.css) and sample data (demo.js)
@@ -63,6 +65,10 @@ at phone width: the tests read CSS text, they do not see layout.
 - **A color role states its contrast** in `$extensions["kanshi.contrast"]`
   (`on`: the backgrounds it sits on, `min`: 4.5 for text, 3 for frames). A new
   role gets its promise in the same change.
+- **A mode redefines roles, never invents them**: a file in `tokens/modes/`
+  holds only `color` roles that exist in the base, as aliases to the palette,
+  and every contrast promise must hold with the mode applied. The tests
+  check both, and that the mode block carries exactly those roles.
 - **The generated CSS is never edited by hand**: change the tokens, run
   `npm run tokens`, commit both. A test rebuilds it in memory and compares.
 - **Every `--k-*` property used is defined** by tokens.css or by a stylesheet.

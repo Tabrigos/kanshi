@@ -20,6 +20,29 @@ export async function tokenTree() {
   return tree;
 }
 
+function mergeInto(target, override) {
+  for (const [key, value] of Object.entries(override)) {
+    const isGroup = value && typeof value === 'object' && !Array.isArray(value) && !('$value' in value);
+    if (isGroup && target[key] && typeof target[key] === 'object') mergeInto(target[key], value);
+    else if (value && typeof value === 'object' && '$value' in value && target[key]) target[key] = { ...target[key], ...value };
+    else target[key] = value;
+  }
+  return target;
+}
+
+/** The modes in tokens/modes/: name, its own tree, and the base tree with it applied. */
+export async function modes() {
+  const dir = path.join(root, 'tokens', 'modes');
+  const names = (await readdir(dir)).filter((name) => name.endsWith('.tokens.json'));
+  assert.ok(names.includes('emergency.tokens.json'), 'tokens/modes/emergency.tokens.json was not found');
+  return Promise.all(
+    names.map(async (file) => {
+      const own = JSON.parse(await readFile(path.join(dir, file), 'utf8'));
+      return { name: file.replace('.tokens.json', ''), own, applied: mergeInto(await tokenTree(), structuredClone(own)) };
+    }),
+  );
+}
+
 /** Every token under a group, as [dotted path, token]. */
 export function tokensUnder(group, trail = []) {
   return Object.entries(group).flatMap(([key, child]) => {

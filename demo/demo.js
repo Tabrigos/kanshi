@@ -28,6 +28,15 @@
     buttonFx.setAttribute('aria-pressed', String(on));
     try { localStorage.setItem('kanshi.fx', on ? 'on' : 'off'); } catch (error) { /* not remembered */ }
   });
+  // Emergency mode: the button, or #emergency in the address to open in it.
+  const buttonEmergency = document.getElementById('button-emergency');
+  function setEmergency(on) {
+    if (on) root.dataset.mode = 'emergency';
+    else delete root.dataset.mode;
+    buttonEmergency.setAttribute('aria-pressed', String(on));
+  }
+  setEmergency(location.hash === '#emergency');
+  buttonEmergency.addEventListener('click', () => setEmergency(root.dataset.mode !== 'emergency'));
   buttonPause.addEventListener('click', () => {
     running = !running;
     root.classList.toggle('k-running', running);
