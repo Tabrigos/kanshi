@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { root } from '../scripts/tokens.mjs';
-import { literalColors, propertiesDefined, propertiesUsed, ungatedLoops } from '../scripts/css-guard.mjs';
+import { literalColors, propertiesDefined, propertiesUsed, rules, ungatedLoops } from '../scripts/css-guard.mjs';
 
 async function stylesheets() {
   const files = [];
@@ -53,6 +53,18 @@ test('every endless animation waits for the motion preference and the pause swit
   assert.deepEqual(loops, []);
   const gated = files.map((file) => file.css).join('\n').match(/\binfinite\b/g) ?? [];
   assert.ok(gated.length >= 2, `expected the blink and the ticker loops, found ${gated.length}`);
+});
+
+// Found live on 2026-10-25: on a phone, a tap leaves :hover stuck on the
+// ticker, which stayed paused until the next tap elsewhere.
+test('a pause on :hover lives only where the pointer can hover, never on touch screens', async () => {
+  const hoverPauses = (await stylesheets())
+    .filter((file) => file.name.startsWith('src/'))
+    .flatMap((file) => rules(file.css).map((rule) => ({ ...rule, file: file.name })))
+    .filter((rule) => /:hover\b/.test(rule.selector) && /animation-play-state\s*:\s*paused/.test(rule.body));
+  assert.ok(hoverPauses.length >= 1, 'the ticker pause on :hover was not found');
+  const ungated = hoverPauses.filter((rule) => !rule.within.some((prelude) => /\(hover:\s*hover\)/.test(prelude)));
+  assert.deepEqual(ungated.map((rule) => `${rule.file}:${rule.line} ${rule.selector}`), []);
 });
 
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {

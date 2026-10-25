@@ -144,11 +144,13 @@
 /* ——— ticker: a band of text running right to left. The content is written
    twice (the copy aria-hidden) so the loop has no seam. It runs only while
    the root carries `k-running` and the viewer has not asked for less motion,
-   and it stops under the pointer or the focus; otherwise it stands still and
-   is cut at the edge. Its duration is a speed, not a transition: set
-   `--k-ticker-duration` on the ticker for longer or shorter content. ——— */
+   and it stops under the focus and, where a pointer can hover, under the
+   pointer: on a touch screen :hover sticks after a tap and would leave it
+   paused. Otherwise it stands still and is cut at the edge. Its duration is
+   a speed, not a transition: the default runs about 60 px/s for a line of
+   about 950 px; set `--k-ticker-duration` for longer or shorter content. ——— */
 .k-ticker {
-  --k-ticker-duration: 40s;
+  --k-ticker-duration: 16s;
   overflow: hidden;
   border-block: var(--k-frame-line) solid var(--k-color-border);
   background: var(--k-color-surface);
@@ -167,8 +169,12 @@
   .k-running .k-ticker-track {
     animation: k-ticker var(--k-ticker-duration) linear infinite;
   }
-  .k-running .k-ticker:hover .k-ticker-track,
   .k-running .k-ticker:focus-within .k-ticker-track {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .k-running .k-ticker:hover .k-ticker-track {
     animation-play-state: paused;
   }
 }
