@@ -1,0 +1,71 @@
+/*
+ * Kanshi base: the page, the type roles, focus, the CRT layer and motion
+ * rules. Needs tokens.css first. Colors only through --k-color-* roles;
+ * transparencies are color-mix() of a role, never a literal.
+ */
+
+/* Matisse is not redistributable, so it is never downloaded: it is used only
+   when the viewer already has it installed. The free fallbacks follow it in
+   --k-font-family-display. */
+@font-face {
+  font-family: "Kanshi Matisse";
+  src: local("FOT-Matisse Pro EB"), local("FOT-MatissePro-EB"), local("FOT-Matisse ProN EB"),
+    local("Matisse EB"), local("EVA-Matisse_Classic");
+}
+
+:root {
+  color-scheme: dark;
+  --k-grid-line: color-mix(in srgb, var(--k-color-accent) 10%, transparent);
+  --k-glow: 0 0 6px color-mix(in srgb, var(--k-color-accent) 45%, transparent);
+  --k-scanline: color-mix(in srgb, var(--k-color-background) 45%, transparent);
+  --k-tint-accent: color-mix(in srgb, var(--k-color-accent) 14%, transparent);
+  --k-tint-critical: color-mix(in srgb, var(--k-color-critical) 8%, transparent);
+  --k-rule-soft: color-mix(in srgb, var(--k-color-border) 50%, transparent);
+}
+
+body {
+  background-color: var(--k-color-background);
+  color: var(--k-color-text);
+  font-family: var(--k-font-family-ui);
+  font-size: var(--k-font-size-ui);
+}
+
+/* The faint monitor grid behind everything; opt-in, because a page may
+   already have its own background. */
+.k-grid-bg {
+  background-image:
+    linear-gradient(var(--k-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--k-grid-line) 1px, transparent 1px);
+  background-size: var(--k-frame-grid) var(--k-frame-grid);
+}
+
+/* CRT layer: static scanlines and a glow on chosen text. Turned on by the
+   `k-fx` class on the root element, so a page can offer a switch. */
+.k-fx body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, var(--k-scanline) 2px 3px);
+}
+.k-fx .k-glow {
+  text-shadow: var(--k-glow);
+}
+
+:focus-visible {
+  outline: 2px solid var(--k-color-text);
+  outline-offset: 2px;
+}
+
+/* Blinking runs only when the viewer has not asked for less motion, and only
+   while the root carries `k-running`: WCAG 2.2.2 wants a way to stop it. */
+@keyframes k-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.35; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .k-running .k-blink {
+    animation: k-blink var(--k-motion-blink) steps(1) infinite;
+  }
+}

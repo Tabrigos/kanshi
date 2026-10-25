@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+Thumbs.db
+
+# private files of whoever works with Claude Code: CLAUDE.md imports AGENTS.md
+CLAUDE.md
+.claude/

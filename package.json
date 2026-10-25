@@ -1,0 +1,33 @@
+{
+  "name": "kanshi",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A frontend theme drawn from the monitor interfaces of 1990s Japanese mecha anime: DTCG design tokens and plain CSS for dashboards and monitoring.",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "tokens": "node scripts/build-tokens.mjs",
+    "test": "node --test \"tests/*.test.mjs\""
+  },
+  "devDependencies": {
+    "style-dictionary": "5.6.1"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "keywords": [
+    "design-tokens",
+    "dtcg",
+    "css",
+    "theme",
+    "dashboard",
+    "fui",
+    "retro"
+  ]
+}

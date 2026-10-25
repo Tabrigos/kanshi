@@ -1,0 +1,207 @@
+/*
+ * Kanshi shapes. Each block is one shape, named k-<shape>; states are classes
+ * or data attributes on the shape. No page layout here: grids and page
+ * skeletons belong to the page. Needs tokens.css and base.css first.
+ */
+
+/* ——— label: uppercase, tracked, the voice of every interface caption ——— */
+.k-label {
+  font-family: var(--k-font-family-ui);
+  font-weight: var(--k-font-weight-ui);
+  font-size: var(--k-font-size-caption);
+  letter-spacing: var(--k-font-tracking-label);
+  text-transform: uppercase;
+}
+
+/* ——— tab: a solid accent block, the name tag of a screen ——— */
+.k-tab {
+  background: var(--k-color-accent);
+  color: var(--k-color-on-accent);
+  font-weight: 700;
+  letter-spacing: var(--k-font-tracking-label);
+  text-transform: uppercase;
+  padding: 2px 10px;
+}
+
+/* ——— button ——— */
+.k-button {
+  font: var(--k-font-weight-ui) var(--k-font-size-caption) / 1 var(--k-font-family-ui);
+  letter-spacing: var(--k-font-tracking-label);
+  text-transform: uppercase;
+  color: var(--k-color-accent);
+  background: transparent;
+  border: var(--k-frame-line) solid var(--k-color-accent);
+  padding: 7px 12px;
+  cursor: pointer;
+}
+.k-button:hover { background: var(--k-tint-accent); }
+.k-button[aria-pressed="true"] { background: var(--k-color-accent); color: var(--k-color-on-accent); }
+
+/* ——— panel: a framed screen with a slanted title tab and bright corners ——— */
+.k-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--k-color-surface);
+  border: var(--k-frame-line) solid var(--k-color-border);
+}
+.k-panel::before,
+.k-panel::after {
+  content: "";
+  position: absolute;
+  width: var(--k-frame-corner);
+  height: var(--k-frame-corner);
+  border: 0 solid var(--k-color-accent);
+}
+.k-panel::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.k-panel::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+.k-panel-head {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--k-space-2);
+  border-bottom: var(--k-frame-line) solid var(--k-color-border);
+}
+.k-panel-title {
+  display: flex;
+  align-items: center;
+  gap: var(--k-space-2);
+  background: var(--k-color-accent);
+  color: var(--k-color-on-accent);
+  padding: 3px 22px 3px 8px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+  font-weight: 700;
+  letter-spacing: var(--k-font-tracking-label);
+  text-transform: uppercase;
+}
+/* The Japanese half of a title: mincho, no tracking. */
+.k-panel-title [lang="ja"] {
+  font-family: var(--k-font-family-display);
+  font-weight: var(--k-font-weight-display);
+  letter-spacing: 0;
+}
+.k-panel-meta {
+  align-self: center;
+  padding-right: var(--k-space-3);
+  font-family: var(--k-font-family-data);
+  font-size: var(--k-font-size-caption);
+  color: var(--k-color-text-dim);
+  white-space: nowrap;
+}
+.k-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--k-space-3);
+  min-width: 0;
+  padding: var(--k-space-3) var(--k-space-3) var(--k-space-4);
+}
+
+/* ——— tones: one class sets the color of state ——— */
+.k-tone-ok { color: var(--k-color-ok); }
+.k-tone-warning { color: var(--k-color-warning); }
+.k-tone-critical { color: var(--k-color-critical); }
+
+/* ——— chip: a state in words, with a square marker ——— */
+.k-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  border: var(--k-frame-line) solid currentColor;
+  padding: 3px 8px;
+  font-weight: var(--k-font-weight-ui);
+  font-size: var(--k-font-size-caption);
+  letter-spacing: var(--k-font-tracking-label);
+  text-transform: uppercase;
+}
+.k-chip::before { content: ""; width: 7px; height: 7px; background: currentColor; }
+
+/* ——— hazard: diagonal stripes around a short notice ——— */
+.k-hazard {
+  display: flex;
+  justify-content: center;
+  padding-block: 6px;
+  background: repeating-linear-gradient(-45deg, var(--k-color-accent) 0 14px, var(--k-color-background) 14px 28px);
+}
+.k-hazard > * {
+  background: var(--k-color-background);
+  color: var(--k-color-accent);
+  padding: 4px 14px;
+  font-weight: 700;
+  font-size: var(--k-font-size-caption);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ——— title card: an SVG whose lines are squeezed to fill their width
+   (textLength + lengthAdjust="spacingAndGlyphs"), the gesture of the
+   original title cards ——— */
+.k-titlecard { background: var(--k-color-background); border: var(--k-frame-line) solid var(--k-color-border); }
+.k-titlecard svg { display: block; width: 100%; max-width: 100%; height: auto; }
+.k-titlecard .k-display { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); fill: var(--k-color-text); }
+.k-titlecard .k-ui { font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); fill: var(--k-color-text); }
+.k-titlecard .k-accent { fill: var(--k-color-accent); }
+.k-titlecard .k-rule { stroke: var(--k-color-text); stroke-width: 3; }
+
+/* ——— hex grid: zones as hexagons, in three states ——— */
+.k-hexgrid { width: 100%; max-width: 100%; height: auto; }
+.k-hex polygon { fill: none; stroke: var(--k-color-accent); stroke-width: 2; }
+.k-hex text { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 22px; text-anchor: middle; fill: var(--k-color-accent); }
+.k-hex .k-hex-sub { font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); font-size: 11px; letter-spacing: 0.12em; }
+.k-hex[data-state="off"] polygon { stroke: var(--k-color-border); stroke-dasharray: 4 4; }
+.k-hex[data-state="off"] text { fill: var(--k-color-text-dim); }
+.k-hex[data-state="alert"] polygon { fill: var(--k-color-critical); stroke: var(--k-color-critical); }
+.k-hex[data-state="alert"] text { fill: var(--k-color-on-critical); }
+
+/* ——— vote: three voters and a verdict ——— */
+.k-vote { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--k-space-2); }
+.k-voter { display: grid; justify-items: start; gap: 4px; min-width: 0; padding: var(--k-space-2); border: var(--k-frame-line) solid var(--k-color-border); }
+.k-voter-sign { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 2.4rem; line-height: 1; transform: scaleX(0.8); transform-origin: left; }
+.k-voter-name { font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); color: var(--k-color-text-dim); }
+.k-voter[data-vote="yes"] { border-color: var(--k-color-ok); color: var(--k-color-ok); }
+.k-voter[data-vote="no"] { border-color: var(--k-color-critical); color: var(--k-color-critical); background: var(--k-tint-critical); }
+.k-voter[data-vote="wait"] { color: var(--k-color-warning); }
+.k-verdict { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--k-space-2); padding-top: var(--k-space-2); border-top: var(--k-frame-line) solid var(--k-color-border); }
+.k-verdict-word { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 1.9rem; letter-spacing: 0.05em; }
+
+/* ——— countdown and segment bar ——— */
+.k-countdown { font-family: var(--k-font-family-data); font-weight: var(--k-font-weight-data-strong); font-size: clamp(2.6rem, 7vw, 4.2rem); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--k-color-accent); }
+.k-countdown small { font-size: 0.45em; }
+.k-countdown[data-low] { color: var(--k-color-critical); }
+.k-segments { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; height: 16px; }
+.k-segments > * { background: var(--k-color-border); opacity: 0.35; }
+.k-segments > [data-on] { background: var(--k-color-accent); opacity: 1; }
+.k-segments[data-low] > [data-on] { background: var(--k-color-critical); }
+
+/* ——— metric: a big value with its label and unit ——— */
+.k-metric { display: grid; gap: 2px; padding: 4px 0 4px var(--k-space-3); border-left: 3px solid var(--k-color-accent); }
+.k-metric.k-tone-ok { border-left-color: var(--k-color-ok); }
+.k-metric.k-tone-critical { border-left-color: var(--k-color-critical); }
+.k-metric-label { color: var(--k-color-text-dim); }
+.k-metric-value { font-family: var(--k-font-family-data); font-weight: var(--k-font-weight-data-strong); font-size: var(--k-font-size-value); line-height: 1.05; font-variant-numeric: tabular-nums; color: var(--k-color-text); }
+.k-metric-unit { font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); color: var(--k-color-text-dim); }
+
+/* ——— chart: line with area, grid, threshold and endpoint ——— */
+.k-chart { width: 100%; max-width: 100%; height: auto; }
+.k-chart .k-chart-grid { stroke: var(--k-grid-line); stroke-width: 1; }
+.k-chart .k-chart-axis { font-family: var(--k-font-family-data); font-size: 10px; fill: var(--k-color-text-dim); }
+.k-chart .k-chart-area { fill: var(--k-tint-accent); }
+.k-chart .k-chart-line { fill: none; stroke: var(--k-color-accent); stroke-width: 2; }
+.k-chart .k-chart-threshold { stroke: var(--k-color-critical); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.k-chart .k-chart-threshold-label { font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); font-size: 10px; letter-spacing: 0.12em; fill: var(--k-color-critical); }
+.k-chart .k-chart-end { fill: var(--k-color-accent); stroke: var(--k-color-background); stroke-width: 2; }
+
+/* ——— log: newest line at the bottom, in full color ——— */
+.k-log { display: flex; flex-direction: column; justify-content: flex-end; min-height: 13.2em; overflow: hidden; font-family: var(--k-font-family-data); font-size: 0.8rem; line-height: 1.65; }
+.k-log > * { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--k-color-text-dim); }
+.k-log > [data-newest] { color: var(--k-color-text); }
+.k-log-tag { display: inline-block; min-width: 7ch; color: var(--k-color-accent); }
+
+/* ——— table ——— */
+.k-table-wrap { overflow-x: auto; }
+.k-table { width: 100%; min-width: 560px; border-collapse: collapse; font-family: var(--k-font-family-data); font-size: 0.82rem; }
+.k-table th { padding: 6px 10px; border-bottom: var(--k-frame-line) solid var(--k-color-accent); text-align: left; color: var(--k-color-text-dim); font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); font-size: var(--k-font-size-caption); letter-spacing: var(--k-font-tracking-label); text-transform: uppercase; }
+.k-table td { padding: 7px 10px; border-bottom: var(--k-frame-line) solid var(--k-rule-soft); font-variant-numeric: tabular-nums; }
+.k-table tr:hover td { background: color-mix(in srgb, var(--k-color-accent) 6%, transparent); }

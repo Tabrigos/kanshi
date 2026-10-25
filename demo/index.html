@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" class="k-fx k-running">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kanshi demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@900&family=Barlow+Condensed:wght@500;600;700&family=M+PLUS+1+Code:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="../src/base.css">
+<link rel="stylesheet" href="../src/components.css">
+<link rel="stylesheet" href="demo.css">
+<script src="demo.js" defer></script>
+</head>
+<body class="k-grid-bg">
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <span class="k-tab">Kanshi</span>
+      <small><span lang="ja">監視</span> · DEMO 0.0 · SAMPLE DATA</small>
+    </div>
+    <div class="controls">
+      <span class="clock k-glow" id="clock" aria-label="Local time">--:--:--</span>
+      <button type="button" class="k-button" id="button-fx" aria-pressed="true">CRT effects</button>
+      <button type="button" class="k-button" id="button-pause" aria-pressed="false">Pause</button>
+    </div>
+  </header>
+
+  <section class="k-titlecard titlecard" aria-label="Title card">
+    <svg viewBox="0 0 1000 330" role="img" aria-label="監視, Kanshi, monitoring interface">
+      <text class="k-display" x="0" y="300" font-size="340" textLength="540" lengthAdjust="spacingAndGlyphs">監視</text>
+      <line class="k-rule" x1="580" y1="40" x2="1000" y2="40"></line>
+      <text class="k-display" x="580" y="175" font-size="150" textLength="420" lengthAdjust="spacingAndGlyphs">KANSHI</text>
+      <text class="k-ui" x="580" y="238" font-size="50" textLength="420" lengthAdjust="spacingAndGlyphs">MONITORING INTERFACE</text>
+      <text class="k-ui k-accent" x="580" y="298" font-size="34" textLength="420" lengthAdjust="spacingAndGlyphs">第零版 · DTCG TOKENS · CSS</text>
+    </svg>
+    <p class="caption">Each line is squeezed to fill its width (SVG textLength), like the title cards of the series. The mincho is Matisse when it is installed on your machine, Zen Old Mincho 900 otherwise.</p>
+  </section>
+
+  <div class="k-hazard"><span>Sample data · provisional palette</span></div>
+
+  <main class="grid">
+    <section class="k-panel span-5" aria-labelledby="title-alert">
+      <div class="k-panel-head">
+        <div class="k-panel-title" id="title-alert">Alert state <span lang="ja">警報</span></div>
+        <span class="k-panel-meta">15 ZONES</span>
+      </div>
+      <div class="k-panel-body">
+        <svg class="k-hexgrid" id="hexgrid" viewBox="0 0 480 250" role="img" aria-label="Fifteen zones"></svg>
+        <span class="k-chip k-tone-critical" id="alert-chip">3 zones in alarm</span>
+      </div>
+    </section>
+
+    <section class="k-panel span-4" aria-labelledby="title-vote">
+      <div class="k-panel-head">
+        <div class="k-panel-title" id="title-vote">Consensus <span lang="ja">合議</span></div>
+        <span class="k-panel-meta" id="vote-round">ROUND 041</span>
+      </div>
+      <div class="k-panel-body">
+        <div class="k-vote" id="vote">
+          <div class="k-voter" data-vote="yes"><span class="k-voter-sign" lang="ja">甲</span><span class="k-voter-name">NODE KŌ</span><span class="k-label">承認 yes</span></div>
+          <div class="k-voter" data-vote="no"><span class="k-voter-sign" lang="ja">乙</span><span class="k-voter-name">NODE OTSU</span><span class="k-label">否決 no</span></div>
+          <div class="k-voter" data-vote="yes"><span class="k-voter-sign" lang="ja">丙</span><span class="k-voter-name">NODE HEI</span><span class="k-label">承認 yes</span></div>
+        </div>
+        <div class="k-verdict">
+          <strong class="k-verdict-word k-tone-ok" id="verdict" lang="ja">可決</strong>
+          <span class="k-chip k-tone-ok" id="verdict-chip">Approved 2/3</span>
+        </div>
+        <p class="caption" id="vote-proposal">Proposal: publish today's brief.</p>
+      </div>
+    </section>
+
+    <section class="k-panel span-3" aria-labelledby="title-power">
+      <div class="k-panel-head">
+        <div class="k-panel-title" id="title-power">Power <span lang="ja">残存電力</span></div>
+        <span class="k-panel-meta">INTERNAL</span>
+      </div>
+      <div class="k-panel-body">
+        <div class="k-countdown k-glow" id="countdown">03:34<small>.37</small></div>
+        <div class="k-segments" id="segments" aria-hidden="true"></div>
+        <div class="pair"><span>SUPPLY</span><b>BATTERY</b></div>
+        <div class="pair"><span>RED BELOW</span><b>01:00</b></div>
+      </div>
+    </section>
+
+    <section class="k-panel span-all" aria-labelledby="title-system">
+      <div class="k-panel-head">
+        <div class="k-panel-title" id="title-system">System <span lang="ja">系統</span></div>
+        <span class="k-panel-meta">UPDATED NOW</span>
+      </div>
+      <div class="k-panel-body">
+        <div class="metrics">
+          <div class="k-metric"><span class="k-metric-label k-label">Last sync</span><span class="k-metric-value">12</span><span class="k-metric-unit">minutes ago</span></div>
+          <div class="k-metric k-tone-ok"><span class="k-metric-label k-label">Skill evals</span><span class="k-metric-value">58/58</span><span class="k-metric-unit">all green</span></div>
+          <div class="k-metric"><span class="k-metric-label k-label">Inbox</span><span class="k-metric-value">9</span><span class="k-metric-unit">notes to sort</span></div>
+          <div class="k-metric k-tone-ok"><span class="k-metric-label k-label">Containers</span><span class="k-metric-value">2/2</span><span class="k-metric-unit">running</span></div>
+          <div class="k-metric k-tone-critical"><span class="k-metric-label k-label">Audit</span><span class="k-metric-value">13/15</span><span class="k-metric-unit">2 checks failed</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="k-panel span-5" aria-labelledby="title-cpu">
+      <div class="k-panel-head">
+        <div class="k-panel-title" id="title-cpu">CPU load <span lang="ja">負荷</span></div>
+        <span class="k-panel-meta" id="cpu-now">41%</span>
+      </div>
+      <div class="k-panel-body">
+        <svg class="k-chart" id="chart" viewBox="0 0 420 150" role="img" aria-label="CPU load over the last 80 seconds"></svg>
+      </div>
+    </section>
+
+    <section class="k-panel span-7" aria-labelledby="title-log">
+      <div class="k-panel-head">
+        <div class="k-panel-title" id="title-log">Event log <span lang="ja">記録</span></div>
+        <span class="k-panel-meta">LAST 8</span>
+      </div>
+      <div class="k-panel-body">
+        <div class="k-log" id="log"></div>
+      </div>
+    </section>
+
+    <section class="k-panel span-all" aria-labelledby="title-services">
+      <div class="k-panel-head">
+        <div class="k-panel-title" id="title-services">Services <span lang="ja">稼働</span></div>
+        <span class="k-panel-meta">5 SERVICES</span>
+      </div>
+      <div class="k-panel-body">
+        <div class="k-table-wrap">
+          <table class="k-table">
+            <thead><tr><th>Service</th><th>State</th><th>Up for</th><th>Last event</th></tr></thead>
+            <tbody>
+              <tr><td>dashboard</td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>brief written at 07:02</td></tr>
+              <tr><td>notes app</td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>vault mounted</td></tr>
+              <tr><td>hourly sync</td><td><span class="k-chip k-tone-ok">Ok</span></td><td>—</td><td>committed 4 files</td></tr>
+              <tr><td>morning brief</td><td><span class="k-chip k-tone-ok">Ok</span></td><td>—</td><td>today's note created</td></tr>
+              <tr><td>weekly audit</td><td><span class="k-chip k-tone-critical">Error</span></td><td>—</td><td>container down during the check</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="specimen" aria-label="Specimen">
+    <section class="k-panel">
+      <div class="k-panel-head"><div class="k-panel-title">Color roles <span lang="ja">色</span></div><span class="k-panel-meta">LIVE FROM TOKENS.CSS</span></div>
+      <div class="k-panel-body"><div class="swatches" id="swatches"></div></div>
+    </section>
+    <section class="k-panel">
+      <div class="k-panel-head"><div class="k-panel-title">Type <span lang="ja">書体</span></div><span class="k-panel-meta">THREE ROLES</span></div>
+      <div class="k-panel-body types">
+        <div class="type"><span class="role">DISPLAY</span><span class="sample sample-display" lang="ja">監視、開始 KANSHI</span></div>
+        <div class="type"><span class="role">UI</span><span class="sample sample-ui">Link stable · Signal lost</span></div>
+        <div class="type"><span class="role">DATA</span><span class="sample sample-data">04:59.99 · 41% · 稼働中 · 0x3F2A</span></div>
+        <p class="caption">Display: Matisse when installed, then Zen Old Mincho 900. Interface: Barlow Condensed in place of a condensed Helvetica. Data: M PLUS 1 Code, which has Japanese glyphs too.</p>
+      </div>
+    </section>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "font": {
+    "$description": "Three roles: a heavy mincho for title cards, a condensed sans for interface labels, a monospace with Japanese glyphs for data. Every family is free (OFL) except Matisse, which is only used when already installed on the viewer's machine (see `src/base.css`).",
+    "family": {
+      "$type": "fontFamily",
+      "display": { "$value": ["Kanshi Matisse", "Zen Old Mincho", "Noto Serif JP", "Hiragino Mincho ProN", "serif"] },
+      "ui": { "$value": ["Barlow Condensed", "Arial Narrow", "Helvetica Neue", "sans-serif"] },
+      "data": { "$value": ["M PLUS 1 Code", "ui-monospace", "Cascadia Mono", "monospace"] }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "display": { "$value": 900 },
+      "ui": { "$value": 600 },
+      "data": { "$value": 400 },
+      "data-strong": { "$value": 700 }
+    },
+    "size": {
+      "$type": "dimension",
+      "caption": { "$value": { "value": 0.75, "unit": "rem" }, "$description": "12 px at the default root size: the smallest text allowed" },
+      "ui": { "$value": { "value": 0.95, "unit": "rem" } },
+      "heading": { "$value": { "value": 1.15, "unit": "rem" } },
+      "value": { "$value": { "value": 2.6, "unit": "rem" }, "$description": "A metric read from across the room" }
+    },
+    "tracking": {
+      "$type": "dimension",
+      "label": { "$value": { "value": 0.14, "unit": "em" }, "$description": "Letter spacing of uppercase labels" }
+    }
+  }
+}
