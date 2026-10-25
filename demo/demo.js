@@ -36,6 +36,8 @@
     buttonEmergency.setAttribute('aria-pressed', String(on));
   }
   setEmergency(location.hash === '#emergency');
+  // A hash typed into the address of an open page does not reload it.
+  window.addEventListener('hashchange', () => setEmergency(location.hash === '#emergency'));
   buttonEmergency.addEventListener('click', () => setEmergency(root.dataset.mode !== 'emergency'));
   buttonPause.addEventListener('click', () => {
     running = !running;

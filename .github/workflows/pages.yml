@@ -33,6 +33,11 @@ jobs:
         run: |
           mkdir _site
           cp -r demo src _site/
+          # Pages caches every file for 10 minutes: a version on the local
+          # links keeps a fresh page from running with a stale stylesheet.
+          version="${GITHUB_SHA::7}"
+          sed -i -E "s#(href=\"[^\"]+\.css)\"#\1?v=${version}\"#g; s#(src=\"demo\.js)\"#\1?v=${version}\"#g" _site/demo/index.html
+          grep -c "?v=${version}" _site/demo/index.html
           cat > _site/index.html <<'HTML'
           <!doctype html>
           <meta charset="utf-8">
