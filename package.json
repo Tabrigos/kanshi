@@ -4,6 +4,11 @@
   "private": true,
   "description": "A frontend theme drawn from the monitor interfaces of 1990s Japanese mecha anime: DTCG design tokens and plain CSS for dashboards and monitoring.",
   "license": "MIT",
+  "homepage": "https://tabrigos.github.io/kanshi/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tabrigos/kanshi.git"
+  },
   "type": "module",
   "files": [
     "src",

@@ -22,7 +22,11 @@ scripts/build-tokens.mjs  writes what tokens.mjs builds
 scripts/contrast.mjs   pure: WCAG contrast and the contrast promises of the tokens
 scripts/css-guard.mjs  pure: literal colors and --k-* references in CSS text
 tests/                 node:test, one file per module or rule
+.github/workflows/     ci.yml (tokens regenerated identical, tests) and pages.yml (the demo on GitHub Pages)
 ```
+
+The demo is published at https://tabrigos.github.io/kanshi/ on every push
+to `main`, after the tests pass: what is on `main` is what people see.
 
 Who may import whom: `tokens.mjs` imports Style Dictionary; `contrast.mjs` and
 `css-guard.mjs` import nothing; tests import any script.

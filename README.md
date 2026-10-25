@@ -6,6 +6,8 @@ cards squeezed to fill their frame, hexagonal alarm grids, condensed uppercase
 labels. Built for dashboards and monitoring screens, where every panel exists
 to tell you what is happening.
 
+**[Live demo](https://tabrigos.github.io/kanshi/)**
+
 > **Status: 0.0, not released.** The palette is provisional, chosen by eye: it
 > will be replaced by colors sampled from frames of the original series. Names
 > of classes and tokens may still change.
@@ -23,7 +25,7 @@ to tell you what is happening.
   chip, metric, hazard band, title card, hex grid, vote, countdown, chart, log
   and table.
 - **`demo/index.html`**: every shape on one screen with moving sample data.
-  Open it straight from the file system.
+  Open it straight from the file system, or [online](https://tabrigos.github.io/kanshi/).
 
 ## Use it
 
