@@ -4,17 +4,17 @@
  */
 
 :root {
-  --k-color-background: #040506; /** Page background */
-  --k-color-surface: #0a0c0d; /** Panel background */
-  --k-color-border: #8a5513; /** Panel frames and dividers */
+  --k-color-background: #0e0600; /** Page background */
+  --k-color-surface: #160b04; /** Panel background */
+  --k-color-border: #8f560a; /** Panel frames and dividers */
   --k-color-text: #f1ede4; /** Values and primary text */
-  --k-color-text-dim: #b8701a; /** Labels, units, secondary text */
-  --k-color-accent: #ff9a1f; /** The signal color: title tabs, active controls, data lines */
-  --k-color-on-accent: #040506; /** Text set on an accent fill */
+  --k-color-text-dim: #b86d0b; /** Labels, units, secondary text */
+  --k-color-accent: #f59d14; /** The signal color: title tabs, active controls, data lines */
+  --k-color-on-accent: #0e0600; /** Text set on an accent fill */
   --k-color-ok: #43e97b;
-  --k-color-warning: #ff9a1f;
-  --k-color-critical: #ff3a2e;
-  --k-color-on-critical: #040506; /** Text set on a critical fill, such as an alarm hexagon */
+  --k-color-warning: #f59d14;
+  --k-color-critical: #ff2a1c;
+  --k-color-on-critical: #0e0600; /** Text set on a critical fill, such as an alarm hexagon */
   --k-motion-duration-tick: 60ms; /** A counter stepping to its next value */
   --k-motion-duration-step: 90ms; /** One segment of a bar lighting up or going dark */
   --k-motion-duration-swap: 110ms; /** A shape changing state: tone, fill, border */
@@ -49,8 +49,8 @@
 }
 
 :root[data-mode="emergency"] {
-  --k-color-surface: #140707; /** Panel background */
-  --k-color-border: #c02c20; /** Panel frames and dividers */
+  --k-color-surface: #1a0503; /** Panel background */
+  --k-color-border: #cc2516; /** Panel frames and dividers */
   --k-color-text-dim: #e0533f; /** Labels, units, secondary text */
-  --k-color-accent: #ff3a2e; /** The signal color: title tabs, active controls, data lines */
+  --k-color-accent: #ff2a1c; /** The signal color: title tabs, active controls, data lines */
 }

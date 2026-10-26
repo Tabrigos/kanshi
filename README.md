@@ -8,9 +8,10 @@ to tell you what is happening.
 
 **[Live demo](https://tabrigos.github.io/kanshi/)**
 
-> **Status: 0.0, not released.** The palette is provisional, chosen by eye: it
-> will be replaced by colors sampled from frames of the original series. Names
-> of classes and tokens may still change.
+> **Status: 0.0, not released.** The palette is sampled from frames of a film
+> remake and moved where legibility asks for it; frames of the original series
+> are still to be sampled, so values may shift. Names of classes and tokens may
+> still change.
 
 ## What is in the box
 
