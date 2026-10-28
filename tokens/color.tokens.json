@@ -1,14 +1,14 @@
 {
   "palette": {
     "$type": "color",
-    "$description": "Raw values, not meant for components: the CSS uses the roles in `color`. Sampled from screen graphics in frames of a film remake (the bright core of the lit strokes, glow excluded), then moved where legibility needs it: each moved value says so. Frames of the original series are still to be sampled.",
+    "$description": "Raw values, not meant for components: the CSS uses the roles in `color`. Sampled from screen graphics in frames of the original series and of a film remake (the bright core of the lit strokes, glow excluded), then moved where legibility needs it: each moved value says so.",
     "void": { "$value": { "colorSpace": "srgb", "components": [0.0549, 0.0235, 0], "hex": "#0e0600" }, "$description": "The monitor glass when nothing is drawn: sampled, the dark of the amber screens" },
     "panel": { "$value": { "colorSpace": "srgb", "components": [0.0863, 0.0431, 0.0157], "hex": "#160b04" }, "$description": "The glass lifted a step, so a panel reads against the page" },
     "line": { "$value": { "colorSpace": "srgb", "components": [0.5608, 0.3373, 0.0392], "hex": "#8f560a" }, "$description": "The amber dimmed until frames recede, keeping 3:1" },
     "amber": { "$value": { "colorSpace": "srgb", "components": [0.9608, 0.6157, 0.0784], "hex": "#f59d14" }, "$description": "Sampled #e3890d from the text and numbers of the amber monitors, lifted so the signal stands apart from secondary text and from red" },
     "amber-dim": { "$value": { "colorSpace": "srgb", "components": [0.7216, 0.4275, 0.0431], "hex": "#b86d0b" }, "$description": "The amber dimmed for secondary text, keeping 4.5:1" },
     "red": { "$value": { "colorSpace": "srgb", "components": [1, 0.1647, 0.1098], "hex": "#ff2a1c" }, "$description": "Sampled #f41715 from the alarm hexagons, lifted for legibility: as text it held 4.5:1 on a panel by a hair" },
-    "green": { "$value": { "colorSpace": "srgb", "components": [0.2627, 0.9137, 0.4824], "hex": "#43e97b" } },
+    "green": { "$value": { "colorSpace": "srgb", "components": [0.349, 0.949, 0.7098], "hex": "#59f2b5" }, "$description": "Sampled: the mint of the green screens of the original series" },
     "paper": { "$value": { "colorSpace": "srgb", "components": [0.9451, 0.9294, 0.8941], "hex": "#f1ede4" } },
     "panel-alarm": { "$value": { "colorSpace": "srgb", "components": [0.102, 0.0196, 0.0118], "hex": "#1a0503" }, "$description": "Panel glass under an emergency: the dark of the red screens" },
     "red-dim": { "$value": { "colorSpace": "srgb", "components": [0.8, 0.1451, 0.0863], "hex": "#cc2516" }, "$description": "The red dimmed for frames, keeping 3:1" },

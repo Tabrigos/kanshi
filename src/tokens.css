@@ -11,7 +11,7 @@
   --k-color-text-dim: #b86d0b; /** Labels, units, secondary text */
   --k-color-accent: #f59d14; /** The signal color: title tabs, active controls, data lines */
   --k-color-on-accent: #0e0600; /** Text set on an accent fill */
-  --k-color-ok: #43e97b;
+  --k-color-ok: #59f2b5;
   --k-color-warning: #f59d14;
   --k-color-critical: #ff2a1c;
   --k-color-on-critical: #0e0600; /** Text set on a critical fill, such as an alarm hexagon */
