@@ -83,11 +83,11 @@
   function paintHexes() {
     const alarm = alarmClusters[clusterIndex % alarmClusters.length];
     for (const hex of hexes) {
-      const state = alarm.includes(hex.id) ? 'alert' : offZones.includes(hex.id) ? 'off' : 'ok';
+      const state = alarm.includes(hex.id) ? 'critical' : offZones.includes(hex.id) ? 'off' : 'ok';
       hex.group.dataset.state = state;
-      hex.group.classList.toggle('k-blink', state === 'alert');
-      hex.sign.textContent = { alert: '警報', off: '停止', ok: '正常' }[state];
-      hex.label.textContent = `${{ alert: 'WARN', off: 'OFF', ok: 'ZONE' }[state]} ${pad(hex.id + 1)}`;
+      hex.group.classList.toggle('k-blink', state === 'critical');
+      hex.sign.textContent = { critical: '警報', off: '停止', ok: '正常' }[state];
+      hex.label.textContent = `${{ critical: 'ALARM', off: 'OFF', ok: 'ZONE' }[state]} ${pad(hex.id + 1)}`;
     }
     document.getElementById('alert-chip').textContent = `${alarm.length} zones in alarm`;
   }

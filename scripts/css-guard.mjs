@@ -1,5 +1,6 @@
-// Reads CSS text for the two rules of the hand-written stylesheets: colors
-// come only from tokens, and every `--k-*` property used is defined somewhere.
+// Reads CSS text for the rules of the hand-written stylesheets: colors come
+// only from tokens, every `--k-*` property used is defined somewhere, endless
+// animations are gated, and the parts of a shape carry its name.
 // Pure: it takes CSS as a string and knows nothing about which files exist.
 // Named colors (`black`, `red`) are not caught: too many false positives in
 // property names and values; review keeps them out.
@@ -68,6 +69,32 @@ export function ungatedLoops(css) {
     .filter((rule) => /\banimation\s*:[^;]*\binfinite\b|animation-iteration-count\s*:\s*infinite/.test(rule.body))
     .filter((rule) => !(rule.within.some((prelude) => /prefers-reduced-motion:\s*no-preference/.test(prelude)) && /\.k-running\b/.test(rule.selector)))
     .map(({ selector, line }) => ({ selector, line }));
+}
+
+// Classes of base.css that switch a whole page, not shapes: a shape may sit
+// inside them without taking their name.
+const SWITCHES = new Set(['k-running', 'k-fx']);
+
+/**
+ * Classes styled inside a shape without carrying its name: in
+ * `.k-titlecard .k-display` the part should be `.k-titlecard-display`.
+ * The tone classes (`k-tone-*`) go on any shape and are left alone.
+ * @returns {{ selector: string, part: string, shape: string, line: number }[]}
+ */
+export function partsOutsideTheirShape(css) {
+  const found = [];
+  for (const rule of rules(css)) {
+    for (const selector of rule.selector.split(',').map((text) => text.trim())) {
+      const compounds = selector.split(/\s*[>+~]\s*|\s+/);
+      const classesOf = (compound) => [...compound.matchAll(/\.(k-[\w-]+)/g)].map((match) => match[1]);
+      const shape = compounds.slice(0, -1).flatMap(classesOf).filter((name) => !SWITCHES.has(name)).at(-1);
+      if (!shape) continue;
+      for (const part of classesOf(compounds.at(-1))) {
+        if (!part.startsWith(`${shape}-`) && !part.startsWith('k-tone-')) found.push({ selector, part, shape, line: rule.line });
+      }
+    }
+  }
+  return found;
 }
 
 /** @returns {Set<string>} the `--k-*` names given a value */

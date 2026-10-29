@@ -199,13 +199,13 @@
 
 /* ——— title card: an SVG whose lines are squeezed to fill their width
    (textLength + lengthAdjust="spacingAndGlyphs"), the gesture of the
-   original title cards ——— */
+   original title cards. `data-accent` sets a line in the signal color ——— */
 .k-titlecard { background: var(--k-color-background); border: var(--k-frame-line) solid var(--k-color-border); }
 .k-titlecard svg { display: block; width: 100%; max-width: 100%; height: auto; }
-.k-titlecard .k-display { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); fill: var(--k-color-text); }
-.k-titlecard .k-ui { font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); fill: var(--k-color-text); }
-.k-titlecard .k-accent { fill: var(--k-color-accent); }
-.k-titlecard .k-rule { stroke: var(--k-color-text); stroke-width: 3; }
+.k-titlecard .k-titlecard-display { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); fill: var(--k-color-text); }
+.k-titlecard .k-titlecard-ui { font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); fill: var(--k-color-text); }
+.k-titlecard [data-accent] { fill: var(--k-color-accent); }
+.k-titlecard .k-titlecard-rule { stroke: var(--k-color-text); stroke-width: 3; }
 
 /* ——— hex grid: zones as hexagons, in three states ——— */
 .k-hexgrid { width: 100%; max-width: 100%; height: auto; }
@@ -214,8 +214,8 @@
 .k-hex .k-hex-sub { font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); font-size: 11px; letter-spacing: 0.12em; }
 .k-hex[data-state="off"] polygon { stroke: var(--k-color-border); stroke-dasharray: 4 4; }
 .k-hex[data-state="off"] text { fill: var(--k-color-text-dim); }
-.k-hex[data-state="alert"] polygon { fill: var(--k-color-critical); stroke: var(--k-color-critical); }
-.k-hex[data-state="alert"] text { fill: var(--k-color-on-critical); }
+.k-hex[data-state="critical"] polygon { fill: var(--k-color-critical); stroke: var(--k-color-critical); }
+.k-hex[data-state="critical"] text { fill: var(--k-color-on-critical); }
 
 /* ——— vote: three voters and a verdict ——— */
 .k-vote { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--k-space-2); }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { root } from '../scripts/tokens.mjs';
-import { literalColors, propertiesDefined, propertiesUsed, rules, ungatedLoops } from '../scripts/css-guard.mjs';
+import { literalColors, partsOutsideTheirShape, propertiesDefined, propertiesUsed, rules, ungatedLoops } from '../scripts/css-guard.mjs';
 
 async function stylesheets() {
   const files = [];
@@ -65,6 +65,38 @@ test('a pause on :hover lives only where the pointer can hover, never on touch s
   assert.ok(hoverPauses.length >= 1, 'the ticker pause on :hover was not found');
   const ungated = hoverPauses.filter((rule) => !rule.within.some((prelude) => /\(hover:\s*hover\)/.test(prelude)));
   assert.deepEqual(ungated.map((rule) => `${rule.file}:${rule.line} ${rule.selector}`), []);
+});
+
+test('the naming guard sees a part without the name of its shape, and accepts tones and switches', () => {
+  const css = [
+    '.k-card .k-title { }',
+    '.k-card .k-card-title, .k-card > .k-card-body { }',
+    '.k-running .k-ticker-track { }',
+    '.k-led.k-tone-ok, .k-card .k-tone-critical { }',
+  ].join('\n');
+  assert.deepEqual(partsOutsideTheirShape(css).map((hit) => hit.part), ['k-title']);
+});
+
+test('the parts of a shape carry its name', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const nested = rules(css).filter((rule) => /\.k-[\w-]+[^,]*\s+[^,]*\.k-/.test(rule.selector));
+  assert.ok(nested.length >= 3, `expected the nested parts of chart, hex grid and title card, found ${nested.length}`);
+  assert.deepEqual(partsOutsideTheirShape(css).map((hit) => `components.css:${hit.line} ${hit.selector}`), []);
+});
+
+// A state that names a severity uses the words of the tones (k-tone-*), so
+// the same alarm is not "critical" on a chip and something else on a hex.
+const STATES = new Set(['off', 'ok', 'warning', 'critical']);
+const statesOutsideTheList = (css) => [...css.matchAll(/\[data-state="([^"]*)"\]/g)].map((match) => match[1]).filter((value) => !STATES.has(value));
+
+test('the state guard sees a value outside the list', () => {
+  assert.deepEqual(statesOutsideTheList('.a[data-state="off"], .a[data-state="alert"] { }'), ['alert']);
+});
+
+test('every data-state value of the shapes is off, ok, warning or critical', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  assert.ok(css.includes('[data-state="off"]'), 'the off state of the hex grid was not found');
+  assert.deepEqual(statesOutsideTheList(css), []);
 });
 
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {

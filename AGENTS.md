@@ -69,6 +69,13 @@ at phone width: the tests read CSS text, they do not see layout.
   holds only `color` roles that exist in the base, as aliases to the palette,
   and every contrast promise must hold with the mode applied. The tests
   check both, and that the mode block carries exactly those roles.
+- **Names.** A shape is `k-<shape>` and its parts are `k-<shape>-<part>`;
+  a class styled inside a shape carries the shape's name. A state that names a
+  severity uses the words of the tones (`ok`, `warning`, `critical`, plus
+  `off`), as a `k-tone-*` class or as a `data-state` value; a yes/no flag is
+  a bare data attribute (`data-off`, `data-low`, `data-accent`). The classes
+  of `base.css` (`k-grid-bg`, `k-fx`, `k-glow`, `k-blink`, `k-running`) are
+  page switches, not shapes. `tests/css.test.mjs` checks parts and states.
 - **The generated CSS is never edited by hand**: change the tokens, run
   `npm run tokens`, commit both. A test rebuilds it in memory and compares.
 - **Every `--k-*` property used is defined** by tokens.css or by a stylesheet.
