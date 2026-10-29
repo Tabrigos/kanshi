@@ -97,6 +97,23 @@ export function partsOutsideTheirShape(css) {
   return found;
 }
 
+/** @returns {Set<string>} the `k-*` classes that some selector styles */
+export function classesStyled(css) {
+  return new Set(rules(css).flatMap((rule) => [...rule.selector.matchAll(/\.(k-[\w-]+)/g)].map((match) => match[1])));
+}
+
+/** @returns {Set<string>} the data attributes some selector reads, bare (`data-off`) and with their value (`data-state="off"`) */
+export function attributesStyled(css) {
+  const found = new Set();
+  for (const rule of rules(css)) {
+    for (const [, name, value] of rule.selector.matchAll(/\[(data-[\w-]+)(?:="([^"]*)")?\]/g)) {
+      found.add(name);
+      if (value !== undefined) found.add(`${name}="${value}"`);
+    }
+  }
+  return found;
+}
+
 /** @returns {Set<string>} the `--k-*` names given a value */
 export function propertiesDefined(css) {
   return new Set([...withoutComments(css).matchAll(/(--k-[\w-]+)\s*:/g)].map((match) => match[1]));

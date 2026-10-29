@@ -5,8 +5,12 @@ All notable changes to Kanshi are recorded here, following
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-29
+
 ### Added
 
+- An agent skill in `skills/kanshi/`, shipped in the package and versioned with it: a short guide (which shape for which need, the rules, what not to do) and a reference of every class, custom property and data attribute, checked against the stylesheets by a test.
+- A naming convention, checked by the tests: the parts of a shape carry its name (`k-titlecard-display`), and a state that names a severity uses the words of the tones (`data-state="critical"`).
 - DTCG design tokens with a raw `palette` and `color` roles, each role stating the contrast it keeps; type, space and frame tokens.
 - Motion tokens: eight durations from `tick` (60 ms) to `blink` (1 s) and two easings, `linear` and `out`, none elastic. Under `prefers-reduced-motion` every duration but `blink` drops to 0 ms, so states still change, at once.
 - Emergency mode: `data-mode="emergency"` on the root turns the signal color and the frames red, while `ok`, `warning` and `critical` keep their meaning. Every contrast promise holds in the mode too.

@@ -4,4 +4,7 @@ Thumbs.db
 
 # private files of whoever works with Claude Code: CLAUDE.md imports AGENTS.md
 CLAUDE.md
-.claude/
+.claude/*
+# except the link to the skill of this package (skills/kanshi), so agents
+# working here read the skill of this commit
+!.claude/skills/

@@ -19,6 +19,8 @@ src/tokens.css         GENERATED from the tokens (npm run tokens); committed. :r
 src/base.css           page defaults, Matisse via local() only, focus, k-grid-bg, k-fx, blink rules
 src/components.css     the k-* shapes; no page layout
 demo/                  the demo page: its own layout (demo.css) and sample data (demo.js)
+skills/kanshi/         the agent skill shipped in the package: SKILL.md and references/api.md;
+                       .claude/skills/kanshi links to it (a text file where git has no symlinks)
 scripts/tokens.mjs     the only module that knows Style Dictionary; builds the outputs in memory
 scripts/build-tokens.mjs  writes what tokens.mjs builds
 scripts/contrast.mjs   pure: WCAG contrast and the contrast promises of the tokens
@@ -46,7 +48,7 @@ Node 24.
 ```bash
 npm ci
 npm run tokens   # regenerate src/tokens.css after changing a token
-npm test         # the whole suite, under a second
+npm test         # the whole suite, a few seconds (one test runs npm pack --dry-run)
 ```
 
 Open `demo/index.html` in a browser to look at a change. **A change to a shape
@@ -76,6 +78,14 @@ at phone width: the tests read CSS text, they do not see layout.
   a bare data attribute (`data-off`, `data-low`, `data-accent`). The classes
   of `base.css` (`k-grid-bg`, `k-fx`, `k-glow`, `k-blink`, `k-running`) are
   page switches, not shapes. `tests/css.test.mjs` checks parts and states.
+- **The skill follows the CSS.** A class, property or data attribute added,
+  renamed or removed changes `skills/kanshi/references/api.md` and, if
+  needed, `SKILL.md` in the same commit: `tests/skill-reference.test.mjs`
+  fails otherwise. Whoever raises the version raises `metadata.version` of
+  the skill and adds the CHANGELOG entry. `tests/skill.test.mjs` is a copy of
+  a shared template: only the constants above its line change. A change to
+  the table or the "Do not" of the skill is tried by a fresh agent with a task
+  that does not name Kanshi.
 - **The generated CSS is never edited by hand**: change the tokens, run
   `npm run tokens`, commit both. A test rebuilds it in memory and compares.
 - **Every `--k-*` property used is defined** by tokens.css or by a stylesheet.

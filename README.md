@@ -8,9 +8,10 @@ to tell you what is happening.
 
 **[Live demo](https://tabrigos.github.io/kanshi/)**
 
-> **Status: 0.0, not released.** The palette is sampled from frames of the
-> original series and of a film remake, and moved where legibility asks for it.
-> Names of classes and tokens may still change.
+> **Status: 0.1, not on the npm registry yet.** The palette is sampled from
+> frames of the original series and of a film remake, and moved where
+> legibility asks for it. From this version on, a renamed class or token is
+> recorded in the changelog.
 
 ## What is in the box
 
@@ -52,6 +53,16 @@ Fonts are not bundled. The demo loads Zen Old Mincho, Barlow Condensed and
 M PLUS 1 Code from Google Fonts, all under the SIL Open Font License. The title
 face of the original series, Matisse EB by Fontworks, is not redistributable:
 Kanshi uses it only when it is already installed on the viewer's machine.
+
+## For coding agents
+
+The package ships a skill for AI coding assistants in `skills/kanshi/`,
+versioned with the package: which shape answers which need, the rules, and a
+reference of every class, custom property and data attribute, checked
+against the stylesheets by a test. A project copies it into
+`.claude/skills/kanshi/`, keeps the copy in git and checks it against the
+installed version by hash, so the agent reads the guide of the version it
+actually uses.
 
 ## Accessibility
 
