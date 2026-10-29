@@ -52,7 +52,7 @@
   <main class="grid">
     <section class="k-panel span-5" aria-labelledby="title-alert">
       <div class="k-panel-head">
-        <div class="k-panel-title" id="title-alert">Alert state <span lang="ja">警報</span></div>
+        <h2 class="k-panel-title" id="title-alert">Alert state <span lang="ja">警報</span></h2>
         <span class="k-panel-meta">15 ZONES</span>
       </div>
       <div class="k-panel-body">
@@ -63,7 +63,7 @@
 
     <section class="k-panel span-4" aria-labelledby="title-vote">
       <div class="k-panel-head">
-        <div class="k-panel-title" id="title-vote">Consensus <span lang="ja">合議</span></div>
+        <h2 class="k-panel-title" id="title-vote">Consensus <span lang="ja">合議</span></h2>
         <span class="k-panel-meta" id="vote-round">ROUND 041</span>
       </div>
       <div class="k-panel-body">
@@ -82,7 +82,7 @@
 
     <section class="k-panel span-3" aria-labelledby="title-power">
       <div class="k-panel-head">
-        <div class="k-panel-title" id="title-power">Power <span lang="ja">残存電力</span></div>
+        <h2 class="k-panel-title" id="title-power">Power <span lang="ja">残存電力</span></h2>
         <span class="k-panel-meta">INTERNAL</span>
       </div>
       <div class="k-panel-body">
@@ -95,7 +95,7 @@
 
     <section class="k-panel span-all" aria-labelledby="title-system">
       <div class="k-panel-head">
-        <div class="k-panel-title" id="title-system">System <span lang="ja">系統</span></div>
+        <h2 class="k-panel-title" id="title-system">System <span lang="ja">系統</span></h2>
         <span class="k-panel-meta">UPDATED NOW</span>
       </div>
       <div class="k-panel-body">
@@ -111,7 +111,7 @@
 
     <section class="k-panel span-5" aria-labelledby="title-cpu">
       <div class="k-panel-head">
-        <div class="k-panel-title" id="title-cpu">CPU load <span lang="ja">負荷</span></div>
+        <h2 class="k-panel-title" id="title-cpu">CPU load <span lang="ja">負荷</span></h2>
         <span class="k-panel-meta" id="cpu-now">41%</span>
       </div>
       <div class="k-panel-body">
@@ -121,7 +121,7 @@
 
     <section class="k-panel span-7" aria-labelledby="title-log">
       <div class="k-panel-head">
-        <div class="k-panel-title" id="title-log">Event log <span lang="ja">記録</span></div>
+        <h2 class="k-panel-title" id="title-log">Event log <span lang="ja">記録</span></h2>
         <span class="k-panel-meta">LAST 8</span>
       </div>
       <div class="k-panel-body">
@@ -131,19 +131,19 @@
 
     <section class="k-panel span-all" aria-labelledby="title-services">
       <div class="k-panel-head">
-        <div class="k-panel-title" id="title-services">Services <span lang="ja">稼働</span></div>
+        <h2 class="k-panel-title" id="title-services">Services <span lang="ja">稼働</span></h2>
         <span class="k-panel-meta">5 SERVICES</span>
       </div>
       <div class="k-panel-body">
         <div class="k-table-wrap">
           <table class="k-table">
-            <thead><tr><th>Service</th><th>State</th><th>Up for</th><th>Last event</th></tr></thead>
+            <thead><tr><th scope="col">Service</th><th scope="col">State</th><th scope="col">Up for</th><th scope="col">Last event</th></tr></thead>
             <tbody>
-              <tr><td><span class="service"><span class="k-led k-tone-ok"></span>dashboard</span></td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>brief written at 07:02</td></tr>
-              <tr><td><span class="service"><span class="k-led k-tone-ok"></span>notes app</span></td><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>vault mounted</td></tr>
-              <tr><td><span class="service"><span class="k-led k-tone-ok"></span>hourly sync</span></td><td><span class="k-chip k-tone-ok">Ok</span></td><td>—</td><td>committed 4 files</td></tr>
-              <tr><td><span class="service"><span class="k-led k-tone-warning" data-off></span>morning brief</span></td><td><span class="k-chip k-tone-warning">Idle</span></td><td>—</td><td>next run at 07:00</td></tr>
-              <tr><td><span class="service"><span class="k-led k-tone-critical k-blink"></span>weekly audit</span></td><td><span class="k-chip k-tone-critical">Error</span></td><td>—</td><td>container down during the check</td></tr>
+              <tr><th scope="row"><span class="service"><span class="k-led k-tone-ok"></span>dashboard</span></th><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>brief written at 07:02</td></tr>
+              <tr><th scope="row"><span class="service"><span class="k-led k-tone-ok"></span>notes app</span></th><td><span class="k-chip k-tone-ok">Run</span></td><td>6d 04h</td><td>vault mounted</td></tr>
+              <tr><th scope="row"><span class="service"><span class="k-led k-tone-ok"></span>hourly sync</span></th><td><span class="k-chip k-tone-ok">Ok</span></td><td>—</td><td>committed 4 files</td></tr>
+              <tr><th scope="row"><span class="service"><span class="k-led k-tone-warning" data-off></span>morning brief</span></th><td><span class="k-chip k-tone-warning">Idle</span></td><td>—</td><td>next run at 07:00</td></tr>
+              <tr><th scope="row"><span class="service"><span class="k-led k-tone-critical k-blink"></span>weekly audit</span></th><td><span class="k-chip k-tone-critical">Error</span></td><td>—</td><td>container down during the check</td></tr>
             </tbody>
           </table>
         </div>
@@ -153,11 +153,11 @@
 
   <section class="specimen" aria-label="Specimen">
     <section class="k-panel">
-      <div class="k-panel-head"><div class="k-panel-title">Color roles <span lang="ja">色</span></div><span class="k-panel-meta">LIVE FROM TOKENS.CSS</span></div>
+      <div class="k-panel-head"><h2 class="k-panel-title">Color roles <span lang="ja">色</span></h2><span class="k-panel-meta">LIVE FROM TOKENS.CSS</span></div>
       <div class="k-panel-body"><div class="swatches" id="swatches"></div></div>
     </section>
     <section class="k-panel">
-      <div class="k-panel-head"><div class="k-panel-title">Type <span lang="ja">書体</span></div><span class="k-panel-meta">THREE ROLES</span></div>
+      <div class="k-panel-head"><h2 class="k-panel-title">Type <span lang="ja">書体</span></h2><span class="k-panel-meta">THREE ROLES</span></div>
       <div class="k-panel-body types">
         <div class="type"><span class="role">DISPLAY</span><span class="sample sample-display" lang="ja">監視、開始 KANSHI</span></div>
         <div class="type"><span class="role">UI</span><span class="sample sample-ui">Link stable · Signal lost</span></div>

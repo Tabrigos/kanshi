@@ -65,7 +65,10 @@
   gap: var(--k-space-2);
   border-bottom: var(--k-frame-line) solid var(--k-color-border);
 }
+/* Often an h2: margin and size are set here, not left to the browser. */
 .k-panel-title {
+  margin: 0;
+  font-size: inherit;
   display: flex;
   align-items: center;
   gap: var(--k-space-2);
@@ -264,6 +267,8 @@
 /* ——— table ——— */
 .k-table-wrap { overflow-x: auto; }
 .k-table { width: 100%; min-width: 560px; border-collapse: collapse; font-family: var(--k-font-family-data); font-size: 0.82rem; }
-.k-table th { padding: 6px 10px; border-bottom: var(--k-frame-line) solid var(--k-color-accent); text-align: left; color: var(--k-color-text-dim); font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); font-size: var(--k-font-size-caption); letter-spacing: var(--k-font-tracking-label); text-transform: uppercase; }
-.k-table td { padding: 7px 10px; border-bottom: var(--k-frame-line) solid var(--k-rule-soft); font-variant-numeric: tabular-nums; }
-.k-table tr:hover td { background: color-mix(in srgb, var(--k-color-accent) 6%, transparent); }
+.k-table thead th { padding: 6px 10px; border-bottom: var(--k-frame-line) solid var(--k-color-accent); text-align: left; color: var(--k-color-text-dim); font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); font-size: var(--k-font-size-caption); letter-spacing: var(--k-font-tracking-label); text-transform: uppercase; }
+.k-table td, .k-table tbody th { padding: 7px 10px; border-bottom: var(--k-frame-line) solid var(--k-rule-soft); font-variant-numeric: tabular-nums; }
+/* A row header (<th scope="row">) looks like the cells of its row. */
+.k-table tbody th { text-align: left; font-weight: inherit; }
+.k-table tr:hover td, .k-table tbody tr:hover th { background: color-mix(in srgb, var(--k-color-accent) 6%, transparent); }

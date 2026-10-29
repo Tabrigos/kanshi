@@ -39,7 +39,7 @@ to tell you what is happening.
 
 <section class="k-panel">
   <div class="k-panel-head">
-    <div class="k-panel-title">Power <span lang="ja">残存電力</span></div>
+    <h2 class="k-panel-title">Power <span lang="ja">残存電力</span></h2>
     <span class="k-panel-meta">INTERNAL</span>
   </div>
   <div class="k-panel-body">

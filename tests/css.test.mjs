@@ -99,6 +99,30 @@ test('every data-state value of the shapes is off, ok, warning or critical', asy
   assert.deepEqual(statesOutsideTheList(css), []);
 });
 
+// The browser makes a th bold and centered and an h2 large with margins; these
+// two shapes take elements that carry those defaults.
+const selectorsOf = (css) => rules(css).flatMap((rule) => rule.selector.split(',').map((selector) => selector.trim()));
+const ruleFor = (css, selector) => rules(css).find((rule) => rule.selector.split(',').map((part) => part.trim()).includes(selector));
+
+test('a row header in the body of a table is styled as a cell, not as a column header', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const headerSelectors = selectorsOf(css).filter((selector) => /^\.k-table\b.*\bth\b/.test(selector));
+  assert.ok(headerSelectors.length >= 1, 'no rule of .k-table styles a th');
+  assert.deepEqual(headerSelectors.filter((selector) => !/\b(thead|tbody)\b.*\bth\b/.test(selector)), [], 'a th rule reaches both column and row headers');
+  assert.equal(ruleFor(css, '.k-table tbody th')?.line, ruleFor(css, '.k-table td')?.line, 'a row header does not share the rule of the cells');
+  const reset = rules(css).filter((rule) => /\.k-table tbody th\b/.test(rule.selector)).map((rule) => rule.body).join(';');
+  assert.match(reset, /text-align\s*:\s*left/);
+  assert.match(reset, /font-weight\s*:\s*inherit/);
+});
+
+test('a panel title can be a heading: it sets its own margin and size', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const title = ruleFor(css, '.k-panel-title');
+  assert.ok(title, 'the .k-panel-title rule was not found');
+  assert.match(title.body, /(^|;|\s)margin\s*:\s*0\s*(;|$)/);
+  assert.match(title.body, /font-size\s*:\s*inherit/);
+});
+
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {
   const files = await stylesheets();
   const defined = new Set(files.flatMap((file) => [...propertiesDefined(file.css)]));
