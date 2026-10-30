@@ -10,6 +10,11 @@ All notable changes to Kanshi are recorded here, following
 - `k-stamp`: the verdict of a screen in large type, framed in the color of its tone, with an optional `k-stamp-label` above its `k-stamp-word`. It glows only under `k-fx`.
 - `k-matrix`: a table of steps by targets, one `k-matrix-bar` per cell on the spine of its column, colored by the `data-state` of the cell (`ok`, `warning`, `critical`, `off` for waiting; none for in progress).
 - Color roles `on-ok` and `on-warning`, the text set on an ok or warning fill, each with its contrast promise.
+- Threshold bars: a segment of `k-segments` with a zone in `data-state` (`ok`, `warning`, `critical`) is lit in that tone, and the start of the warning and critical zones is marked across the bar.
+
+### Changed
+
+- `k-segments` holds as many segments as it has children, instead of 20. A bar of 20 looks as before; unlit segments are dimmed by a transparent color instead of `opacity`.
 
 ## [0.1.0] - 2026-10-29
 

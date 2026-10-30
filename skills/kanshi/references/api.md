@@ -152,8 +152,16 @@ fraction at 45%. `data-low` turns it critical.
 
 ### `.k-segments`
 
-A bar of 20 segments, one child each. `data-on` on a child lights it in the
-accent color; `data-low` on the bar lights them critical.
+A bar of segments, one child each, as many as the page writes (20 for a
+countdown, 30 for a gauge). `data-on` on a child lights it in the accent
+color; `data-low` on the bar lights them all critical.
+
+As a threshold bar, the page also writes the zone of each segment in its
+`data-state` (`ok`, `warning`, `critical`): a lit segment takes the color of
+its zone, and the first segment of the warning and of the critical zone
+carries a mark above and below the bar, visible before the value gets there.
+The label and the value next to the bar are the page's; a `.k-metric` with
+a tone can hold the value.
 
 ### `.k-metric`
 
@@ -217,7 +225,7 @@ lamp of `.k-led`, the rule of `.k-metric`, the color of `.k-verdict-word` and
 | Attribute | On | Effect |
 |---|---|---|
 | `data-mode="emergency"` | `<html>` | the emergency mode; `data-mode` with any other value does nothing |
-| `data-state` | `.k-hex`, a cell of `.k-matrix` | `data-state="off"`, `data-state="critical"`; on a matrix cell also `data-state="ok"`, `data-state="warning"` |
+| `data-state` | `.k-hex`, a cell of `.k-matrix`, a child of `.k-segments` | `data-state="off"`, `data-state="critical"`; on a matrix cell or a segment also `data-state="ok"`, `data-state="warning"` (`off` is not a zone) |
 | `data-vote` | `.k-voter` | `data-vote="yes"`, `data-vote="no"`, `data-vote="wait"` |
 | `data-off` | `.k-led` | unlit lamp |
 | `data-low` | `.k-countdown`, `.k-segments` | critical color |

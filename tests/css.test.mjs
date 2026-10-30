@@ -167,6 +167,28 @@ test('a step in progress, a waiting step and a finished one differ by shape, not
   }
 });
 
+test('a segment bar holds as many segments as the page gives it', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const bar = ruleFor(css, '.k-segments');
+  assert.ok(bar, 'the .k-segments rule was not found');
+  assert.doesNotMatch(bar.body, /repeat\(\s*\d+/, 'the bar fixes the number of its segments');
+  assert.match(bar.body, /grid-auto-flow\s*:\s*column/);
+});
+
+test('a lit segment takes the color of its zone, a zone is marked where it begins, and data-low still wins', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const all = rules(css);
+  const zones = ['ok', 'warning', 'critical'].map((tone) => all.find((rule) => /\.k-segments\b/.test(rule.selector) && rule.selector.includes(`[data-state="${tone}"]`) && /\[data-on\]/.test(rule.selector) && rule.body.includes(`var(--k-color-${tone})`)));
+  assert.deepEqual(zones.map((rule) => Boolean(rule)), [true, true, true], 'a zone does not color its lit segments');
+  for (const tone of ['warning', 'critical']) {
+    const mark = all.filter((rule) => /\.k-segments\b/.test(rule.selector) && new RegExp(`:not\\(\\[data-state="${tone}"\\]\\)\\s*\\+\\s*\\[data-state="${tone}"\\]::before`).test(rule.selector)).map((rule) => rule.body).join(';');
+    assert.match(mark, /content\s*:/, `the start of the ${tone} zone is not marked`);
+    assert.match(mark, new RegExp(`background\\s*:\\s*var\\(--k-color-${tone}\\)`), `the mark of the ${tone} zone is not in its tone`);
+  }
+  const low = all.find((rule) => rule.selector.includes('.k-segments[data-low] > [data-on]'));
+  assert.ok(low && zones.every((rule) => rule.line < low.line), 'a zone color comes after data-low and beats it');
+});
+
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {
   const files = await stylesheets();
   const defined = new Set(files.flatMap((file) => [...propertiesDefined(file.css)]));

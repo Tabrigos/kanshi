@@ -115,6 +115,19 @@
     document.getElementById('vote-proposal').textContent = `Proposal: ${proposals[round % proposals.length]}.`;
   }
 
+  // ——— storage gauges: 30 segments, caution from 70%, danger from 90% ———
+  const zoneOf = (percent) => (percent >= 90 ? 'critical' : percent >= 70 ? 'warning' : 'ok');
+  for (const bar of document.querySelectorAll('.gauge .k-segments')) {
+    const value = Number(bar.dataset.value);
+    for (let i = 0; i < 30; i++) {
+      const segment = document.createElement('i');
+      segment.dataset.state = zoneOf((i * 100) / 30);
+      segment.toggleAttribute('data-on', i < Math.round((value * 30) / 100));
+      bar.append(segment);
+    }
+    bar.nextElementSibling.classList.add(`k-tone-${zoneOf(value)}`);
+  }
+
   // ——— countdown ———
   const countdown = document.getElementById('countdown');
   const segments = document.getElementById('segments');

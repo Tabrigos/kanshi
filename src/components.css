@@ -257,9 +257,20 @@
 .k-countdown { font-family: var(--k-font-family-data); font-weight: var(--k-font-weight-data-strong); font-size: clamp(2.6rem, 7vw, 4.2rem); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--k-color-accent); }
 .k-countdown small { font-size: 0.45em; }
 .k-countdown[data-low] { color: var(--k-color-critical); }
-.k-segments { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; height: 16px; }
-.k-segments > * { background: var(--k-color-border); opacity: 0.35; transition: background-color var(--k-motion-duration-step) var(--k-motion-easing-linear), opacity var(--k-motion-duration-step) var(--k-motion-easing-linear); }
-.k-segments > [data-on] { background: var(--k-color-accent); opacity: 1; }
+/* A bar of as many segments as it has children. A segment in a zone
+   (`data-state` ok, warning, critical) is lit in that tone, and the first
+   segment of the warning and critical zones carries a mark that stands out
+   of the bar, so the threshold shows even before it is reached. */
+.k-segments { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; height: 16px; }
+.k-segments > * { position: relative; background: color-mix(in srgb, var(--k-color-border) 35%, transparent); transition: background-color var(--k-motion-duration-step) var(--k-motion-easing-linear); }
+.k-segments > [data-on] { background: var(--k-color-accent); }
+.k-segments > [data-state="ok"][data-on] { background: var(--k-color-ok); }
+.k-segments > [data-state="warning"][data-on] { background: var(--k-color-warning); }
+.k-segments > [data-state="critical"][data-on] { background: var(--k-color-critical); }
+.k-segments > :not([data-state="warning"]) + [data-state="warning"]::before,
+.k-segments > :not([data-state="critical"]) + [data-state="critical"]::before { content: ""; position: absolute; top: -4px; bottom: -4px; left: -2.5px; width: 2px; }
+.k-segments > :not([data-state="warning"]) + [data-state="warning"]::before { background: var(--k-color-warning); }
+.k-segments > :not([data-state="critical"]) + [data-state="critical"]::before { background: var(--k-color-critical); }
 .k-segments[data-low] > [data-on] { background: var(--k-color-critical); }
 
 /* ——— metric: a big value with its label and unit ——— */

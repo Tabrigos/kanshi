@@ -36,6 +36,10 @@ body {
 
 .pair { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--k-space-2); font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); color: var(--k-color-text-dim); }
 .pair b { font-weight: 500; color: var(--k-color-text); }
+.gauges { gap: var(--k-space-3); }
+.gauge { display: grid; grid-template-columns: 11ch minmax(0, 1fr) 4ch; align-items: center; gap: var(--k-space-2); font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); }
+.gauge-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--k-color-text-dim); }
+.gauge-value { text-align: right; font-weight: var(--k-font-weight-data-strong); font-variant-numeric: tabular-nums; }
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--k-space-2); }
 
 .specimen { display: grid; grid-template-columns: 1fr; gap: var(--k-space-3); }
