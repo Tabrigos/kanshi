@@ -17,6 +17,8 @@ body {
 .clock { min-width: 8ch; font-family: var(--k-font-family-data); font-variant-numeric: tabular-nums; color: var(--k-color-accent); }
 
 .titlecard { display: grid; gap: var(--k-space-2); padding: var(--k-space-5) var(--k-space-4) var(--k-space-3); }
+/* The page title for screen readers: the title card draws it. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .caption { margin: 0; max-width: 80ch; font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); line-height: 1.5; color: var(--k-color-text-dim); }
 
 .grid { display: grid; grid-template-columns: 1fr; gap: var(--k-space-3); }

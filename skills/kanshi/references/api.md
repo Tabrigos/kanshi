@@ -32,8 +32,8 @@ preference; otherwise the element stays fully visible.
 
 ### `.k-fx`
 
-On `<html>`: static scanlines over the page (`--k-scanline`) and a glow on
-`.k-glow` text. Off unless the page opts in.
+On `<html>`: static scanlines over the page (`--k-scanline`), a glow on
+`.k-glow` text and a halo around `.k-stamp`. Off unless the page opts in.
 
 ### `.k-glow`
 
@@ -74,6 +74,16 @@ A framed screen with bright corner marks; a flex column.
 
 A state in words with a square marker, framed in the current color. Takes a
 tone.
+
+### `.k-stamp`
+
+The verdict of a screen in large type, framed with rounded corners in the
+color of its tone (accent without one), next to what it judges. A `.k-chip`
+stays the state of one line or one cell. Takes a tone and `.k-blink`; under
+`.k-fx` it glows.
+
+- `.k-stamp-label`: an optional small line above, saying what is judged.
+- `.k-stamp-word`: the verdict.
 
 ### `.k-led`
 
@@ -185,7 +195,8 @@ panel.
 
 ### `.k-tone-ok`, `.k-tone-warning`, `.k-tone-critical`
 
-Set the color of a state: text and `currentColor` frames (`.k-chip`), the
+Set the color of a state: text and `currentColor` frames (`.k-chip`,
+`.k-stamp`), the
 lamp of `.k-led`, the rule of `.k-metric`, the color of `.k-verdict-word` and
 `.k-log-tag`. The words of the state go in the element too.
 

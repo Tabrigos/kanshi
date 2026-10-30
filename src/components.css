@@ -122,6 +122,28 @@
 }
 .k-chip::before { content: ""; width: 7px; height: 7px; background: currentColor; }
 
+/* ——— stamp: the verdict of a screen, large and framed in the color of its
+   tone (accent without one). An optional small line above it says what is
+   judged. It glows only with `k-fx`, like glowing text. ——— */
+.k-stamp {
+  display: inline-grid;
+  justify-items: center;
+  width: fit-content;
+  padding: 4px 14px 6px;
+  border: calc(var(--k-frame-line) * 2) solid currentColor;
+  border-radius: 8px;
+  color: var(--k-color-accent);
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.k-stamp.k-tone-ok { color: var(--k-color-ok); }
+.k-stamp.k-tone-warning { color: var(--k-color-warning); }
+.k-stamp.k-tone-critical { color: var(--k-color-critical); }
+.k-stamp-label { font-size: var(--k-font-size-caption); font-weight: var(--k-font-weight-ui); letter-spacing: var(--k-font-tracking-label); }
+.k-stamp-word { font-size: 1.6rem; letter-spacing: 0.04em; }
+.k-fx .k-stamp { box-shadow: 0 0 10px color-mix(in srgb, currentColor 35%, transparent), inset 0 0 8px color-mix(in srgb, currentColor 20%, transparent); }
+
 /* ——— led: a square lamp in the color of its tone (accent by default).
    `data-off` shows the lamp unlit; `k-blink` makes it blink, gated like
    every blink. It sits next to words that say the state: color alone never

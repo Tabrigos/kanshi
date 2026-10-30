@@ -123,6 +123,13 @@ test('a panel title can be a heading: it sets its own margin and size', async ()
   assert.match(title.body, /font-size\s*:\s*inherit/);
 });
 
+test('a stamp glows only when the page turns the effects on', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const halos = rules(css).filter((rule) => /\.k-stamp\b/.test(rule.selector) && /box-shadow\s*:/.test(rule.body));
+  assert.ok(halos.length >= 1, 'the halo of .k-stamp was not found');
+  assert.deepEqual(halos.filter((rule) => !/\.k-fx\b/.test(rule.selector)).map((rule) => `${rule.line} ${rule.selector}`), []);
+});
+
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {
   const files = await stylesheets();
   const defined = new Set(files.flatMap((file) => [...propertiesDefined(file.css)]));

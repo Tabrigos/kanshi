@@ -89,7 +89,7 @@
       hex.sign.textContent = { critical: '警報', off: '停止', ok: '正常' }[state];
       hex.label.textContent = `${{ critical: 'ALARM', off: 'OFF', ok: 'ZONE' }[state]} ${pad(hex.id + 1)}`;
     }
-    document.getElementById('alert-chip').textContent = `${alarm.length} zones in alarm`;
+    document.getElementById('alert-count').textContent = `${alarm.length} zones`;
   }
   paintHexes();
 

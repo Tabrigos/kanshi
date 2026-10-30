@@ -53,6 +53,7 @@ pause (see "Rules and traps").
 |---|---|---|
 | a framed screen with a title tab | `.k-panel` | `.k-panel-head`, `.k-panel-title`, `.k-panel-meta`, `.k-panel-body` |
 | a state in words (RUN, ERROR) | `.k-chip` with a tone | `.k-tone-ok`, `.k-tone-warning`, `.k-tone-critical` |
+| the verdict of a screen, large and framed | `.k-stamp` with a tone | `.k-stamp-label`, `.k-stamp-word` |
 | a status lamp | `.k-led` | a tone class; `data-off` for unlit; `.k-blink` |
 | a big number with its label and unit | `.k-metric` | `.k-metric-label`, `.k-metric-value`, `.k-metric-unit` |
 | a countdown, time or power left | `.k-countdown` and `.k-segments` | `data-low` on both; `data-on` on each lit segment |
