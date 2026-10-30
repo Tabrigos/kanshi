@@ -8,6 +8,8 @@ All notable changes to Kanshi are recorded here, following
 ### Added
 
 - `k-stamp`: the verdict of a screen in large type, framed in the color of its tone, with an optional `k-stamp-label` above its `k-stamp-word`. It glows only under `k-fx`.
+- `k-matrix`: a table of steps by targets, one `k-matrix-bar` per cell on the spine of its column, colored by the `data-state` of the cell (`ok`, `warning`, `critical`, `off` for waiting; none for in progress).
+- Color roles `on-ok` and `on-warning`, the text set on an ok or warning fill, each with its contrast promise.
 
 ## [0.1.0] - 2026-10-29
 

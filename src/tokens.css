@@ -12,7 +12,9 @@
   --k-color-accent: #f59d14; /** The signal color: title tabs, active controls, data lines */
   --k-color-on-accent: #0e0600; /** Text set on an accent fill */
   --k-color-ok: #59f2b5;
+  --k-color-on-ok: #0e0600; /** Text set on an ok fill, such as a bar of the status matrix */
   --k-color-warning: #f59d14;
+  --k-color-on-warning: #0e0600; /** Text set on a warning fill, such as a bar of the status matrix */
   --k-color-critical: #ff2a1c;
   --k-color-on-critical: #0e0600; /** Text set on a critical fill, such as an alarm hexagon */
   --k-motion-duration-tick: 60ms; /** A counter stepping to its next value */

@@ -48,9 +48,19 @@
       "$value": "{palette.green}",
       "$extensions": { "kanshi.contrast": { "on": ["color.background", "color.surface"], "min": 4.5 } }
     },
+    "on-ok": {
+      "$value": "{palette.void}",
+      "$description": "Text set on an ok fill, such as a bar of the status matrix",
+      "$extensions": { "kanshi.contrast": { "on": ["color.ok"], "min": 4.5 } }
+    },
     "warning": {
       "$value": "{palette.amber}",
       "$extensions": { "kanshi.contrast": { "on": ["color.background", "color.surface"], "min": 4.5 } }
+    },
+    "on-warning": {
+      "$value": "{palette.void}",
+      "$description": "Text set on a warning fill, such as a bar of the status matrix",
+      "$extensions": { "kanshi.contrast": { "on": ["color.warning"], "min": 4.5 } }
     },
     "critical": {
       "$value": "{palette.red}",

@@ -130,6 +130,43 @@ test('a stamp glows only when the page turns the effects on', async () => {
   assert.deepEqual(halos.filter((rule) => !/\.k-fx\b/.test(rule.selector)).map((rule) => `${rule.line} ${rule.selector}`), []);
 });
 
+// A filled bar carries words, so its text takes the role whose contrast is
+// promised on that fill: on-ok on ok, on-critical on critical.
+const fillsWithoutTheirText = (css, part) => rules(css)
+  .filter((rule) => rule.selector.includes(part))
+  .map((rule) => ({ rule, fill: rule.body.match(/background\s*:\s*var\(--k-color-([a-z-]+)\)/)?.[1] }))
+  .filter(({ fill }) => fill && fill !== 'surface')
+  .filter(({ rule, fill }) => !new RegExp(`(^|[;\\s])color\\s*:\\s*var\\(--k-color-on-${fill}\\)`).test(rule.body))
+  .map(({ rule }) => rule.selector);
+
+test('the fill guard sees a bar whose text is not made for its fill', () => {
+  const css = '.k-x [data-state="ok"] .k-x-bar { background: var(--k-color-ok); color: var(--k-color-on-accent); }\n.k-x-bar { background: var(--k-color-accent); color: var(--k-color-on-accent); }';
+  assert.deepEqual(fillsWithoutTheirText(css, '.k-x-bar'), ['.k-x [data-state="ok"] .k-x-bar']);
+});
+
+test('every filled bar of the status matrix sets the text made for its fill', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const fills = rules(css).filter((rule) => rule.selector.includes('.k-matrix-bar') && /background\s*:\s*var\(--k-color-/.test(rule.body));
+  assert.ok(fills.length >= 4, `expected the fills of the matrix bars, found ${fills.length}`);
+  assert.deepEqual(fillsWithoutTheirText(css, '.k-matrix-bar'), []);
+});
+
+// Accent and warning share a color, and the emergency mode turns the accent
+// red: a step in progress must differ from the others by its shape.
+test('a step in progress, a waiting step and a finished one differ by shape, not only by color', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const bar = ruleFor(css, '.k-matrix-bar');
+  const waiting = ruleFor(css, '.k-matrix [data-state="off"] .k-matrix-bar');
+  assert.ok(bar && waiting, 'the rules of the matrix bar were not found');
+  assert.match(bar.body, /border\s*:[^;]*\bsolid\b/, 'a step in progress is not framed');
+  assert.match(bar.body, /background\s*:\s*var\(--k-color-surface\)/, 'a step in progress is filled');
+  assert.match(waiting.body, /border-style\s*:\s*dashed|border\s*:[^;]*\bdashed\b/, 'a waiting step is not dashed');
+  for (const tone of ['ok', 'warning', 'critical']) {
+    const done = ruleFor(css, `.k-matrix [data-state="${tone}"] .k-matrix-bar`);
+    assert.match(done?.body ?? '', new RegExp(`background\\s*:\\s*var\\(--k-color-${tone}\\)`), `a ${tone} step is not filled`);
+  }
+});
+
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {
   const files = await stylesheets();
   const defined = new Set(files.flatMap((file) => [...propertiesDefined(file.css)]));

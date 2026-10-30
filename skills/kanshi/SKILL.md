@@ -61,6 +61,7 @@ pause (see "Rules and traps").
 | zones on a map, some in alarm | `svg.k-hexgrid` of `g.k-hex` | `data-state="critical"`, `data-state="off"`, `.k-hex-sub` |
 | an event log, newest at the bottom | `.k-log` | `.k-log-tag`, `data-newest` on the last line |
 | a table of services or hosts | `.k-table` inside `.k-table-wrap` | a `.k-chip` or `.k-led` in a cell |
+| steps across several targets, such as a rollout by region | `table.k-matrix` | `.k-matrix-bar` in each cell, `data-state` on the cell |
 | a running line of news | `.k-ticker` holding `.k-ticker-track` | `--k-ticker-duration` |
 | several sources voting, then a verdict | `.k-vote` of `.k-voter`, then `.k-verdict` | `data-vote="yes"`, `data-vote="no"`, `data-vote="wait"`, `.k-verdict-word` |
 | a big title squeezed to its width | an `svg` inside `.k-titlecard` | `.k-titlecard-display`, `.k-titlecard-ui`, `.k-titlecard-rule`, `data-accent` |
@@ -118,8 +119,9 @@ A hex grid: the page computes the points, Kanshi colors the states.
   `var(--k-tint-critical)`. The raw palette is not exposed.
 - **Color never carries a state alone.** A tone colors the shape; the words
   (RUN, ERROR, 警報) say the state, so it reads without color too. The tones
-  are `ok`, `warning` and `critical`, and a hexagon takes the same word in
-  `data-state`.
+  are `ok`, `warning` and `critical`, and a hexagon or a matrix cell takes
+  the same word in `data-state`; `off` is a zone switched off or a step not
+  reached yet.
 - **The emergency mode lives on the root only.** `data-mode="emergency"`
   works on `<html>`; on an inner element it does nothing. It turns
   `--k-color-accent`, `--k-color-border`, `--k-color-text-dim` and

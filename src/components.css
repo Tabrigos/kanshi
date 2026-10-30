@@ -294,3 +294,19 @@
 /* A row header (<th scope="row">) looks like the cells of its row. */
 .k-table tbody th { text-align: left; font-weight: inherit; }
 .k-table tr:hover td, .k-table tbody tr:hover th { background: color-mix(in srgb, var(--k-color-accent) 6%, transparent); }
+
+/* ——— matrix: steps down, targets across, one bar per cell on the spine of
+   its column. The shape follows the step: dashed while waiting (`off`),
+   framed in the accent while in progress (no state), filled in its tone
+   when done (`ok`, `warning`, `critical`). Accent and warning share a color
+   and the emergency mode turns the accent red, so the shape tells them
+   apart. The bar holds the word of the state. ——— */
+.k-matrix { width: 100%; border-collapse: collapse; font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); }
+.k-matrix th { padding: 0 var(--k-space-2) 0 0; text-align: left; white-space: nowrap; color: var(--k-color-accent); font-family: var(--k-font-family-ui); font-weight: var(--k-font-weight-ui); letter-spacing: 0.06em; text-transform: uppercase; }
+.k-matrix thead th { padding-bottom: 6px; text-align: center; color: var(--k-color-text-dim); }
+.k-matrix tbody td { padding: 4px 6px; background: linear-gradient(90deg, transparent calc(50% - 1px), var(--k-color-accent) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)); }
+.k-matrix-bar { box-sizing: border-box; display: grid; place-items: center; min-height: 18px; border: var(--k-frame-line) solid var(--k-color-accent); border-radius: 2px; background: var(--k-color-surface); color: var(--k-color-accent); font-family: var(--k-font-family-ui); font-weight: 700; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; transition: background-color var(--k-motion-duration-swap) var(--k-motion-easing-linear), border-color var(--k-motion-duration-swap) var(--k-motion-easing-linear); }
+.k-matrix [data-state="ok"] .k-matrix-bar { border-color: var(--k-color-ok); background: var(--k-color-ok); color: var(--k-color-on-ok); }
+.k-matrix [data-state="warning"] .k-matrix-bar { border-color: var(--k-color-warning); background: var(--k-color-warning); color: var(--k-color-on-warning); }
+.k-matrix [data-state="critical"] .k-matrix-bar { border-color: var(--k-color-critical); background: var(--k-color-critical); color: var(--k-color-on-critical); }
+.k-matrix [data-state="off"] .k-matrix-bar { border-style: dashed; border-color: var(--k-color-border); color: var(--k-color-text-dim); }

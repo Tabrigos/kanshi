@@ -191,6 +191,18 @@ rows. The column headers are the `<th>` of `<thead>`; a `<th scope="row">` in
 `.k-table-wrap`, which scrolls sideways when the table is wider than its
 panel.
 
+### `.k-matrix`
+
+A `<table>` of steps by targets: each step a row (`<th scope="row">`), each
+target a column (`<th scope="col">` in `<thead>`), each cell a bar on an
+accent spine that runs down the column. The shape follows the step: a bar
+with no state is in progress, framed in the accent; the `data-state` of the
+cell (`<td>`) makes it `off`, dashed, for a step not reached yet, or fills it
+in its tone when done (`ok`, `warning`, `critical`). The page writes the word
+in every bar (RUN, OK, FAIL, WAIT), so the state reads without color.
+
+- `.k-matrix-bar`: the bar inside a `<td>`, holding the word.
+
 ## Tones
 
 ### `.k-tone-ok`, `.k-tone-warning`, `.k-tone-critical`
@@ -205,7 +217,7 @@ lamp of `.k-led`, the rule of `.k-metric`, the color of `.k-verdict-word` and
 | Attribute | On | Effect |
 |---|---|---|
 | `data-mode="emergency"` | `<html>` | the emergency mode; `data-mode` with any other value does nothing |
-| `data-state` | `.k-hex` | `data-state="off"`, `data-state="critical"` |
+| `data-state` | `.k-hex`, a cell of `.k-matrix` | `data-state="off"`, `data-state="critical"`; on a matrix cell also `data-state="ok"`, `data-state="warning"` |
 | `data-vote` | `.k-voter` | `data-vote="yes"`, `data-vote="no"`, `data-vote="wait"` |
 | `data-off` | `.k-led` | unlit lamp |
 | `data-low` | `.k-countdown`, `.k-segments` | critical color |
@@ -230,7 +242,9 @@ and may override them in its own stylesheet.
 | `--k-color-accent` | the signal color: tabs, active controls, data lines, 4.5:1 |
 | `--k-color-on-accent` | text on an accent fill |
 | `--k-color-ok` | ok state, 4.5:1 |
+| `--k-color-on-ok` | text on an ok fill |
 | `--k-color-warning` | warning state, 4.5:1 |
+| `--k-color-on-warning` | text on a warning fill |
 | `--k-color-critical` | critical state, 4.5:1 |
 | `--k-color-on-critical` | text on a critical fill |
 
