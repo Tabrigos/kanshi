@@ -1,6 +1,6 @@
 {
   "name": "kanshi",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "A frontend theme drawn from the monitor interfaces of 1990s Japanese mecha anime: DTCG design tokens and plain CSS for dashboards and monitoring.",
   "license": "MIT",

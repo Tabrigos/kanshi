@@ -2,7 +2,7 @@
 name: kanshi
 description: Styles dashboards and monitoring screens as the monitor interfaces of 1990s Japanese mecha anime (amber signals on black glass, squeezed mincho title cards, hexagonal alarm grids, blinking alarms) with the Kanshi CSS theme, its k-* classes and --k-* design tokens, and an emergency mode that turns the screen red. Use when a page links the Kanshi stylesheets or uses k- classes, or the user builds a status board, a control-room or monitoring screen, an alarm panel or a retro sci-fi interface in plain HTML and CSS, even if they do not name the library. Read it instead of the library's source code.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Kanshi

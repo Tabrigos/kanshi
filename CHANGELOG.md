@@ -5,6 +5,8 @@ All notable changes to Kanshi are recorded here, following
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-30
+
 ### Added
 
 - `k-stamp`: the verdict of a screen in large type, framed in the color of its tone, with an optional `k-stamp-label` above its `k-stamp-word`. It glows only under `k-fx`.

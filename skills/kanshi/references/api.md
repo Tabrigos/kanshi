@@ -4,7 +4,7 @@ Contents: [Stylesheets](#stylesheets) · [Page switches](#page-switches) ·
 [Shapes](#shapes) · [Tones](#tones) · [Data attributes](#data-attributes) ·
 [Custom properties](#custom-properties) · [Emergency mode](#emergency-mode)
 
-Every class, custom property and data attribute of Kanshi 0.1.0. A test
+Every class, custom property and data attribute of Kanshi 0.2.0. A test
 checks this file against the stylesheets: each name here exists, and each
 name of the stylesheets is here.
 
@@ -165,7 +165,10 @@ As a threshold bar, the page also writes the zone of each segment in its
 `data-state` (`ok`, `warning`, `critical`): a lit segment takes the color of
 its zone, and the first segment of the warning and of the critical zone
 carries a mark above and below the bar, visible before the value gets there.
-The label and the value next to the bar are the page's; a `.k-metric` with
+A segment belongs to the zone where it starts, and a value of `v`% lights the
+first `round(v × count / 100)` segments; pick a count that puts the
+thresholds on segment edges (20 for steps of 5%, 30 for thresholds at
+multiples of 10%). The label and the value next to the bar are the page's; a `.k-metric` with
 a tone can hold the value.
 
 ### `.k-metric`
@@ -212,7 +215,9 @@ accent spine that runs down the column. The shape follows the step: a bar
 with no state is in progress, framed in the accent; the `data-state` of the
 cell (`<td>`) makes it `off`, dashed, for a step not reached yet, or fills it
 in its tone when done (`ok`, `warning`, `critical`). The page writes the word
-in every bar (RUN, OK, FAIL, WAIT), so the state reads without color.
+in every bar (RUN, OK, FAIL, WAIT), so the state reads without color. The
+matrix takes the width of its panel and needs no wrapper; with many targets,
+wrap it in `.k-table-wrap` as a table.
 
 - `.k-matrix-bar`: the bar inside a `<td>`, holding the word.
 
