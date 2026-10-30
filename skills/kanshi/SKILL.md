@@ -69,7 +69,7 @@ pause (see "Rules and traps").
 | a warning band across the page | `.k-hazard` | one child holding the text |
 | a name tag, a button, a caption | `.k-tab`, `.k-button`, `.k-label` | `aria-pressed="true"` on a pressed toggle |
 | the whole screen red in an emergency | `data-mode="emergency"` on `<html>` | "Rules and traps" |
-| the monitor grid behind the page | `.k-grid-bg` on `<body>` | |
+| the monitor grid behind the page or behind one box, such as a map | `.k-grid-bg` on `<body>` or on the box | `data-cross` for crosses instead of lines |
 | scanlines and glowing text | `.k-fx` on `<html>`, `.k-glow` on the text | off unless the page opts in |
 | a color, a gap, a duration in the page's CSS | `var(--k-color-accent)`, `var(--k-space-3)`, `var(--k-motion-duration-swap)` | `references/api.md` |
 

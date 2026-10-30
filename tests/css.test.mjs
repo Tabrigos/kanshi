@@ -189,6 +189,17 @@ test('a lit segment takes the color of its zone, a zone is marked where it begin
   assert.ok(low && zones.every((rule) => rule.line < low.line), 'a zone color comes after data-low and beats it');
 });
 
+// The crosses sit on the cell of the line grid, so the two line up on a page
+// that uses both, and they replace the lines instead of adding to them.
+test('a cross grid keeps the cell of the line grid and draws crosses instead of its lines', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/base.css').css;
+  const cross = ruleFor(css, '.k-grid-bg[data-cross]');
+  assert.ok(cross, 'the .k-grid-bg[data-cross] rule was not found');
+  assert.match(cross.body, /background-image\s*:[^;]*var\(--k-grid-cross\)/, 'the crosses do not replace the lines');
+  assert.doesNotMatch(cross.body, /var\(--k-grid-line\)/, 'the lines are drawn under the crosses');
+  assert.match(cross.body, /background-size\s*:\s*var\(--k-frame-grid\)/, 'the crosses do not follow the cell of the grid');
+});
+
 test('every --k-* property used by a stylesheet is defined by one of them', async () => {
   const files = await stylesheets();
   const defined = new Set(files.flatMap((file) => [...propertiesDefined(file.css)]));

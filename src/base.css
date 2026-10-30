@@ -16,6 +16,7 @@
 :root {
   color-scheme: dark;
   --k-grid-line: color-mix(in srgb, var(--k-color-accent) 10%, transparent);
+  --k-grid-cross: color-mix(in srgb, var(--k-color-border) 70%, transparent);
   --k-glow: 0 0 6px color-mix(in srgb, var(--k-color-accent) 45%, transparent);
   --k-scanline: color-mix(in srgb, var(--k-color-background) 45%, transparent);
   --k-tint-accent: color-mix(in srgb, var(--k-color-accent) 14%, transparent);
@@ -37,6 +38,18 @@ body {
     linear-gradient(var(--k-grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--k-grid-line) 1px, transparent 1px);
   background-size: var(--k-frame-grid) var(--k-frame-grid);
+}
+/* A cross of 11px in the middle of each cell instead of the lines: lighter
+   behind dense content, and fit for a single box. Each arm is the corner
+   quadrant of a conic gradient, so no pseudo-element is taken from the box. */
+.k-grid-bg[data-cross] {
+  background-image:
+    conic-gradient(from 270deg at 11px 1px, var(--k-grid-cross) 90deg, transparent 0),
+    conic-gradient(from 270deg at 1px 11px, var(--k-grid-cross) 90deg, transparent 0);
+  background-size: var(--k-frame-grid) var(--k-frame-grid);
+  background-position:
+    calc(var(--k-frame-grid) / 2 - 5px) calc(var(--k-frame-grid) / 2),
+    calc(var(--k-frame-grid) / 2) calc(var(--k-frame-grid) / 2 - 5px);
 }
 
 /* CRT layer: static scanlines and a glow on chosen text. Turned on by the

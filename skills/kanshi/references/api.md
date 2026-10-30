@@ -44,6 +44,11 @@ On text: a glow (`--k-glow`), shown only under `.k-fx`.
 On `<body>` or a large container: the faint monitor grid, cells of
 `--k-frame-grid`, lines of `--k-grid-line`.
 
+With `data-cross` the lines give way to a small cross in the middle of each
+cell, in `--k-grid-cross`: lighter behind dense content, and fit for a single
+box, a panel included (`<section class="k-panel k-grid-bg" data-cross>`).
+It takes no pseudo-element, so it keeps the corners of a panel.
+
 ## Shapes
 
 ### `.k-label`
@@ -232,7 +237,7 @@ lamp of `.k-led`, the rule of `.k-metric`, the color of `.k-verdict-word` and
 | `data-on` | a child of `.k-segments` | lit segment |
 | `data-newest` | a line of `.k-log` | full color, revealed |
 | `data-accent` | a line inside `.k-titlecard` | accent color |
-
+| `data-cross` | `.k-grid-bg` | crosses in the middle of each cell instead of lines |
 ## Custom properties
 
 All are set on `:root` by the stylesheets; a page reads them with `var()`
@@ -264,6 +269,7 @@ Derived in base.css from the roles, so they follow the emergency mode:
 | `--k-tint-critical` | critical at 8%: the background of a `no` voter |
 | `--k-rule-soft` | border at 50%: table row rules |
 | `--k-grid-line` | accent at 10%: the background grid |
+| `--k-grid-cross` | border at 70%: the crosses of `.k-grid-bg[data-cross]` |
 | `--k-glow` | a `text-shadow` value for `.k-glow` |
 | `--k-scanline` | the dark band of the scanlines |
 

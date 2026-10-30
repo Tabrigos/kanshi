@@ -11,6 +11,7 @@ All notable changes to Kanshi are recorded here, following
 - `k-matrix`: a table of steps by targets, one `k-matrix-bar` per cell on the spine of its column, colored by the `data-state` of the cell (`ok`, `warning`, `critical`, `off` for waiting; none for in progress).
 - Color roles `on-ok` and `on-warning`, the text set on an ok or warning fill, each with its contrast promise.
 - Threshold bars: a segment of `k-segments` with a zone in `data-state` (`ok`, `warning`, `critical`) is lit in that tone, and the start of the warning and critical zones is marked across the bar.
+- `data-cross` on `k-grid-bg`: a small cross in the middle of each cell instead of the lines, in `--k-grid-cross`, fit for a single box, a panel included.
 
 ### Changed
 
