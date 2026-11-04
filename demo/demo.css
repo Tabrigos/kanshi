@@ -34,6 +34,7 @@ body {
   .span-7 { grid-column: span 7; }
 }
 
+.column { display: grid; align-content: start; gap: var(--k-space-3); min-width: 0; }
 .pair { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--k-space-2); font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); color: var(--k-color-text-dim); }
 .pair b { font-weight: 500; color: var(--k-color-text); }
 .gauges { gap: var(--k-space-3); }

@@ -8,6 +8,7 @@ All notable changes to Kanshi are recorded here, following
 ### Added
 
 - `k-banner`: the incident in progress, one word fitted to the full width (`k-banner-word`, an SVG as in the title card) between two `k-banner-line` lines of detail, inside striped accent bands with a critical rule each. It turns red in the emergency mode.
+- `k-board`: a board of times in an accent frame with cut corners (rounded where `corner-shape` is not supported), each `k-board-row` a double `k-board-label` and a `k-countdown`.
 
 ## [0.2.0] - 2026-10-30
 

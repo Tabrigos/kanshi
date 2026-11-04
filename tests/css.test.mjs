@@ -203,6 +203,19 @@ test('a banner draws its stripes and word in the accent and its rules in the cri
   assert.match(ruleFor(css, '.k-banner-word text')?.body ?? '', /fill\s*:\s*var\(--k-color-accent\)/, 'the word is not in the accent');
 });
 
+// corner-shape is not everywhere yet: the radius beside it is what other
+// browsers draw, so the frame never loses its corners.
+test('a board cuts its corners where the browser can and rounds them elsewhere, and its rows wrap on a phone', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const board = ruleFor(css, '.k-board');
+  const row = ruleFor(css, '.k-board-row');
+  assert.ok(board && row, 'the rules of the board were not found');
+  assert.match(board.body, /corner-shape\s*:\s*bevel/, 'the corners are not cut');
+  assert.match(board.body, /border-radius\s*:\s*[^;]*[1-9]/, 'without corner-shape the corners have no fallback');
+  assert.match(board.body, /border\s*:[^;]*var\(--k-color-accent\)/, 'the frame is not accent');
+  assert.match(row.body, /flex-wrap\s*:\s*wrap/, 'a row does not wrap its label above the value');
+});
+
 // The crosses sit on the cell of the line grid, so the two line up on a page
 // that uses both, and they replace the lines instead of adding to them.
 test('a cross grid keeps the cell of the line grid and draws crosses instead of its lines', async () => {

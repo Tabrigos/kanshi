@@ -55,6 +55,19 @@
   tickClock();
   setInterval(tickClock, 1000);
 
+  // ——— maintenance board: the window runs out and starts again ———
+  const windowLeft = document.getElementById('window-left');
+  const localTime = document.getElementById('local-time');
+  let windowSeconds = 320;
+  const tickBoard = () => {
+    windowSeconds = windowSeconds > 0 ? windowSeconds - 1 : 320;
+    windowLeft.textContent = `00:${pad(Math.floor(windowSeconds / 60))}:${pad(windowSeconds % 60)}`;
+    windowLeft.toggleAttribute('data-low', windowSeconds < 300);
+    localTime.textContent = clockText(new Date());
+  };
+  tickBoard();
+  setInterval(tickBoard, 1000);
+
   // ——— hex grid ———
   const hexgrid = document.getElementById('hexgrid');
   const RADIUS = 46;

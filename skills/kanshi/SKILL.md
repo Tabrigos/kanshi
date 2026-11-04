@@ -57,6 +57,7 @@ pause (see "Rules and traps").
 | a status lamp | `.k-led` | a tone class; `data-off` for unlit; `.k-blink` |
 | a big number with its label and unit | `.k-metric` | `.k-metric-label`, `.k-metric-value`, `.k-metric-unit` |
 | a countdown, time or power left | `.k-countdown` and `.k-segments` | `data-low` on both; `data-on` on each lit segment |
+| several times of an incident or a maintenance window (expected recovery, time left, local time) | `.k-board` of `.k-board-row` | `.k-board-label` (Japanese, then English) and a `.k-countdown` in each row |
 | a gauge with caution and danger thresholds (disk, memory, queue) | `.k-segments` | `data-on` on each lit segment, its zone in `data-state` |
 | a time series | `svg.k-chart`, drawn by the page | `.k-chart-line`, `.k-chart-area`, `.k-chart-threshold` |
 | zones on a map, some in alarm | `svg.k-hexgrid` of `g.k-hex` | `data-state="critical"`, `data-state="off"`, `.k-hex-sub` |

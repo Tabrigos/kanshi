@@ -173,6 +173,28 @@ mincho; give it a tone.
 A large data-face number in the accent color; a `<small>` inside sets the
 fraction at 45%. `data-low` turns it critical.
 
+### `.k-board`
+
+The times of an incident or a maintenance window in an accent frame with
+cut corners (rounded where the browser lacks `corner-shape`). Each row
+pairs a label with a `.k-countdown`, which keeps its `data-low`; on a narrow
+screen the label goes above the digits.
+
+- `.k-board-row`: one time.
+- `.k-board-label`: a `<span lang="ja">` in large mincho, then a `<span>`
+  with the English line in small capitals.
+
+```html
+<div class="k-board">
+  <div class="k-board-row">
+    <div class="k-board-label"><span lang="ja">残り時間</span><span>Time remaining</span></div>
+    <div class="k-countdown" data-low>04:58</div>
+  </div>
+</div>
+```
+
+An unknown part of a time is written as dashes (`12:40:<small>--</small>`).
+
 ### `.k-segments`
 
 A bar of segments, one child each, as many as the page writes (20 for a
