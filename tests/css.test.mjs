@@ -189,6 +189,20 @@ test('a lit segment takes the color of its zone, a zone is marked where it begin
   assert.ok(low && zones.every((rule) => rule.line < low.line), 'a zone color comes after data-low and beats it');
 });
 
+// The banner takes its stripes and its word from the accent, like the hazard
+// band, so the emergency mode turns them red; its rules are critical in both.
+test('a banner draws its stripes and word in the accent and its rules in the critical tone', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const all = rules(css);
+  for (const edge of ['before', 'after']) {
+    const body = all.filter((rule) => rule.selector.split(',').some((part) => part.trim() === `.k-banner::${edge}`)).map((rule) => rule.body).join(';');
+    assert.match(body, /content\s*:/, `the ${edge} band of the banner is not drawn`);
+    assert.match(body, /repeating-linear-gradient\([^;]*var\(--k-color-accent\)/, `the ${edge} stripes do not come from the accent`);
+    assert.match(body, /border-(top|bottom)\s*:[^;]*var\(--k-color-critical\)/, `the ${edge} rule is not critical`);
+  }
+  assert.match(ruleFor(css, '.k-banner-word text')?.body ?? '', /fill\s*:\s*var\(--k-color-accent\)/, 'the word is not in the accent');
+});
+
 // The crosses sit on the cell of the line grid, so the two line up on a page
 // that uses both, and they replace the lines instead of adding to them.
 test('a cross grid keeps the cell of the line grid and draws crosses instead of its lines', async () => {

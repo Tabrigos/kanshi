@@ -67,6 +67,7 @@ pause (see "Rules and traps").
 | several sources voting, then a verdict | `.k-vote` of `.k-voter`, then `.k-verdict` | `data-vote="yes"`, `data-vote="no"`, `data-vote="wait"`, `.k-verdict-word` |
 | a big title squeezed to its width | an `svg` inside `.k-titlecard` | `.k-titlecard-display`, `.k-titlecard-ui`, `.k-titlecard-rule`, `data-accent` |
 | a warning band across the page | `.k-hazard` | one child holding the text |
+| an incident in progress, readable from across the room | `.k-banner` | `svg.k-banner-word` squeezed like a title card, `.k-banner-line` above and below |
 | a name tag, a button, a caption | `.k-tab`, `.k-button`, `.k-label` | `aria-pressed="true"` on a pressed toggle |
 | the whole screen red in an emergency | `data-mode="emergency"` on `<html>` | "Rules and traps" |
 | the monitor grid behind the page or behind one box, such as a map | `.k-grid-bg` on `<body>` or on the box | `data-cross` for crosses instead of lines |

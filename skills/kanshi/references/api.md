@@ -119,6 +119,24 @@ width with `textLength` and `lengthAdjust="spacingAndGlyphs"`.
 - `.k-titlecard-rule`: a `<line>` drawn as a 3-unit rule.
 - `data-accent` on a line: sets it in the accent color.
 
+### `.k-banner`
+
+The incident in progress, at the top of the page: one word squeezed to the
+full width, between two lines of detail, inside striped accent bands with a
+critical rule each. In the emergency mode the whole banner turns red.
+
+- `.k-banner-word`: an `<svg>` whose `<text>` fills its width, as in the title
+  card: `<svg class="k-banner-word" viewBox="0 0 1000 150" role="img"
+  aria-label="Outage"><text x="0" y="130" font-size="170" textLength="1000"
+  lengthAdjust="spacingAndGlyphs">OUTAGE</text></svg>`. A short word is
+  widened to the width and a long one squeezed: one to three syllables stay
+  legible.
+- `.k-banner-line`: a line of detail above or below the word, its items
+  spread to the edges (state, reference, Japanese label in `lang="ja"`).
+
+A banner the page inserts while it runs carries `role="alert"`, so screen
+readers announce it; one present from the start needs none.
+
 ### `.k-hexgrid`
 
 An `<svg>` that holds the hexagons, scaled to its container width.

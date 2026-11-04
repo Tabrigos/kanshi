@@ -232,6 +232,34 @@
 .k-titlecard [data-accent] { fill: var(--k-color-accent); }
 .k-titlecard .k-titlecard-rule { stroke: var(--k-color-text); stroke-width: 3; }
 
+/* ——— banner: the incident in progress, one word squeezed to the width
+   (an SVG, as in the title card) between two lines of detail, inside striped
+   bands with a critical rule each. The stripes and the word are accent, so
+   the emergency mode turns the whole banner red ——— */
+.k-banner { display: grid; gap: var(--k-space-2); background: var(--k-color-background); color: var(--k-color-accent); }
+.k-banner::before,
+.k-banner::after {
+  content: "";
+  height: 18px;
+  background: repeating-linear-gradient(-45deg, var(--k-color-accent) 0 14px, transparent 14px 28px) content-box;
+}
+.k-banner::before { padding-bottom: 4px; border-bottom: 3px solid var(--k-color-critical); }
+.k-banner::after { padding-top: 4px; border-top: 3px solid var(--k-color-critical); }
+.k-banner-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--k-space-1) var(--k-space-3);
+  padding-inline: var(--k-space-3);
+  font-weight: var(--k-font-weight-ui);
+  letter-spacing: var(--k-font-tracking-label);
+  text-transform: uppercase;
+}
+.k-banner-line [lang="ja"] { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); letter-spacing: 0.1em; }
+.k-banner-word { display: block; width: 100%; max-width: 100%; height: auto; }
+.k-banner-word text { font-family: var(--k-font-family-ui); font-weight: 700; fill: var(--k-color-accent); }
+
 /* ——— hex grid: zones as hexagons, in three states ——— */
 .k-hexgrid { width: 100%; max-width: 100%; height: auto; }
 .k-hex polygon { fill: transparent; stroke: var(--k-color-accent); stroke-width: 2; transition: fill var(--k-motion-duration-swap) var(--k-motion-easing-linear), stroke var(--k-motion-duration-swap) var(--k-motion-easing-linear); }
