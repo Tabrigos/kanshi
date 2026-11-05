@@ -157,7 +157,8 @@
       </div>
     </section>
 
-    <section class="k-panel span-7" aria-labelledby="title-rollout">
+    <div class="span-7 column">
+    <section class="k-panel" aria-labelledby="title-rollout">
       <div class="k-panel-head">
         <h2 class="k-panel-title" id="title-rollout">Rollout <span lang="ja">展開</span></h2>
         <span class="k-panel-meta">BUILD 2.14 · 5 REGIONS</span>
@@ -177,6 +178,24 @@
           </table>
       </div>
     </section>
+
+    <section class="k-panel" aria-labelledby="title-migration">
+      <div class="k-panel-head">
+        <h2 class="k-panel-title" id="title-migration">Migration <span lang="ja">移行</span></h2>
+        <span class="k-panel-meta">DB 3 → 4 · 6 LEVELS</span>
+      </div>
+      <div class="k-panel-body">
+        <ol class="k-levels" aria-label="Migration levels">
+          <li class="k-level" data-state="ok"><span class="k-level-id">LV 01</span><span class="k-level-name">Snapshot</span><span class="k-level-state"><span lang="ja">完了</span> done</span></li>
+          <li class="k-level" data-state="ok"><span class="k-level-id">LV 02</span><span class="k-level-name">Schema</span><span class="k-level-state"><span lang="ja">完了</span> done</span></li>
+          <li class="k-level" data-state="warning"><span class="k-level-id">LV 03</span><span class="k-level-name">Backfill</span><span class="k-level-state"><span lang="ja">完了</span> done · 3 retries</span></li>
+          <li class="k-level" aria-current="step"><span class="k-level-id">LV 04</span><span class="k-level-name">Reindex</span><span class="k-level-state"><span class="k-led k-blink"></span><span lang="ja">進行</span> running</span></li>
+          <li class="k-level" data-state="off"><span class="k-level-id">LV 05</span><span class="k-level-name">Switch</span><span class="k-level-state"><span lang="ja">待機</span> waiting</span></li>
+          <li class="k-level" data-state="off"><span class="k-level-id">LV 06</span><span class="k-level-name">Cleanup</span><span class="k-level-state"><span lang="ja">待機</span> waiting</span></li>
+        </ol>
+      </div>
+    </section>
+    </div>
 
     <div class="span-5 column">
     <section class="k-panel" aria-labelledby="title-storage">

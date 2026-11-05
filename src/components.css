@@ -365,3 +365,42 @@
 .k-matrix [data-state="warning"] .k-matrix-bar { border-color: var(--k-color-warning); background: var(--k-color-warning); color: var(--k-color-on-warning); }
 .k-matrix [data-state="critical"] .k-matrix-bar { border-color: var(--k-color-critical); background: var(--k-color-critical); color: var(--k-color-on-critical); }
 .k-matrix [data-state="off"] .k-matrix-bar { border-style: dashed; border-color: var(--k-color-border); color: var(--k-color-text-dim); }
+
+/* ——— levels: stages in a column beside a shaft, one piece per level, lit
+   for the levels reached. As in the matrix, the shape follows the state: a
+   level with no state is in progress, framed in the accent; `off` waits,
+   dashed; a finished level takes its tone, and a warning or a fault is also
+   filled, so it never reads as the level in progress ——— */
+.k-levels { display: grid; gap: 4px; margin: 0; padding: 0 0 0 26px; list-style: none; }
+.k-level {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--k-space-3);
+  padding: 6px var(--k-space-2);
+  border: var(--k-frame-line) solid var(--k-color-accent);
+  box-shadow: inset 0 0 0 var(--k-frame-line) var(--k-color-accent);
+  font-family: var(--k-font-family-data);
+  font-size: var(--k-font-size-caption);
+}
+.k-level[data-state] { box-shadow: none; }
+.k-level::before { content: ""; position: absolute; top: -5px; bottom: -1px; left: -27px; width: 14px; background: var(--k-color-accent); }
+.k-level:first-child::before { top: -1px; }
+.k-level-id { font-family: var(--k-font-family-ui); font-weight: 700; font-size: var(--k-font-size-ui); letter-spacing: 0.06em; color: var(--k-color-accent); }
+.k-level-name { color: var(--k-color-text); text-transform: uppercase; letter-spacing: 0.08em; overflow-wrap: anywhere; }
+.k-level-state { display: inline-flex; align-items: center; gap: 6px; text-transform: uppercase; color: var(--k-color-accent); }
+.k-level-state [lang="ja"] { font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 0.95rem; }
+.k-level[data-state="ok"] { border-color: var(--k-color-border); }
+.k-level[data-state="ok"] .k-level-id { color: var(--k-color-text-dim); }
+.k-level[data-state="ok"] .k-level-state { color: var(--k-color-ok); }
+.k-level[data-state="warning"] { border-color: var(--k-color-warning); background: color-mix(in srgb, var(--k-color-warning) 12%, transparent); }
+.k-level[data-state="warning"] .k-level-state { color: var(--k-color-warning); }
+.k-level[data-state="critical"] { border-color: var(--k-color-critical); background: color-mix(in srgb, var(--k-color-critical) 12%, transparent); }
+.k-level[data-state="critical"] .k-level-state { color: var(--k-color-critical); }
+.k-level[data-state="critical"]::before { background: var(--k-color-critical); }
+.k-level[data-state="off"] { border-style: dashed; border-color: var(--k-color-border); }
+.k-level[data-state="off"] .k-level-id,
+.k-level[data-state="off"] .k-level-name,
+.k-level[data-state="off"] .k-level-state { color: var(--k-color-text-dim); }
+.k-level[data-state="off"]::before { background: color-mix(in srgb, var(--k-color-border) 30%, transparent); }

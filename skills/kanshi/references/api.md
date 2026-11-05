@@ -261,6 +261,34 @@ wrap it in `.k-table-wrap` as a table.
 
 - `.k-matrix-bar`: the bar inside a `<td>`, holding the word.
 
+### `.k-levels`
+
+An `<ol>` of stages in a single sequence (a release, a migration, a queue of
+jobs), beside a shaft lit down to the stage in progress. Each item is a
+`.k-level`.
+
+### `.k-level`
+
+One stage, with its piece of the shaft. The shape follows the state, as in
+the matrix: no `data-state` is the stage in progress, framed twice in the
+accent (give it `aria-current="step"` too); `data-state="off"` waits, dashed, its
+piece of shaft unlit; `ok`, `warning` and `critical` are finished, and a
+warning or a fault is also filled with its tone. The page writes the state in
+words.
+
+- `.k-level-id`: the number of the stage (LV 05).
+- `.k-level-name`: its name.
+- `.k-level-state`: the state in words, a `<span lang="ja">` and the English
+  word; a `.k-led` can go in front of it.
+
+```html
+<ol class="k-levels" aria-label="Migration">
+  <li class="k-level" data-state="ok"><span class="k-level-id">LV 01</span><span class="k-level-name">Snapshot</span><span class="k-level-state"><span lang="ja">完了</span> done</span></li>
+  <li class="k-level" aria-current="step"><span class="k-level-id">LV 02</span><span class="k-level-name">Reindex</span><span class="k-level-state"><span lang="ja">進行</span> running</span></li>
+  <li class="k-level" data-state="off"><span class="k-level-id">LV 03</span><span class="k-level-name">Switch</span><span class="k-level-state"><span lang="ja">待機</span> waiting</span></li>
+</ol>
+```
+
 ## Tones
 
 ### `.k-tone-ok`, `.k-tone-warning`, `.k-tone-critical`
@@ -275,7 +303,7 @@ lamp of `.k-led`, the rule of `.k-metric`, the color of `.k-verdict-word` and
 | Attribute | On | Effect |
 |---|---|---|
 | `data-mode="emergency"` | `<html>` | the emergency mode; `data-mode` with any other value does nothing |
-| `data-state` | `.k-hex`, a cell of `.k-matrix`, a child of `.k-segments` | `data-state="off"`, `data-state="critical"`; on a matrix cell or a segment also `data-state="ok"`, `data-state="warning"` (`off` is not a zone) |
+| `data-state` | `.k-hex`, a cell of `.k-matrix`, a `.k-level`, a child of `.k-segments` | `data-state="off"`, `data-state="critical"`; on a matrix cell, a level or a segment also `data-state="ok"`, `data-state="warning"` (`off` is not a zone) |
 | `data-vote` | `.k-voter` | `data-vote="yes"`, `data-vote="no"`, `data-vote="wait"` |
 | `data-off` | `.k-led` | unlit lamp |
 | `data-low` | `.k-countdown`, `.k-segments` | critical color |

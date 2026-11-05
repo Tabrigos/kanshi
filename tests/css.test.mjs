@@ -203,6 +203,28 @@ test('a banner draws its stripes and word in the accent and its rules in the cri
   assert.match(ruleFor(css, '.k-banner-word text')?.body ?? '', /fill\s*:\s*var\(--k-color-accent\)/, 'the word is not in the accent');
 });
 
+// As in the matrix: the accent is the warning color, and red in the emergency
+// mode, so the level in progress differs from a faulty one by its shape.
+test('a level in progress, a waiting level and a faulty one differ by shape, and the shaft lights only the levels reached', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const level = ruleFor(css, '.k-level');
+  const waiting = ruleFor(css, '.k-level[data-state="off"]');
+  assert.ok(level && waiting, 'the rules of the level were not found');
+  assert.match(level.body, /border\s*:[^;]*\bsolid\b[^;]*var\(--k-color-accent\)/, 'a level in progress is not framed in the accent');
+  assert.doesNotMatch(level.body, /background\s*:/, 'a level in progress is filled');
+  assert.match(level.body, /box-shadow\s*:\s*inset[^;]*var\(--k-color-accent\)/, 'a level in progress has no double frame');
+  assert.match(ruleFor(css, '.k-level[data-state]')?.body ?? '', /box-shadow\s*:\s*none/, 'a level with a state keeps the double frame of the level in progress');
+  assert.match(waiting.body, /border-style\s*:\s*dashed/, 'a waiting level is not dashed');
+  for (const tone of ['warning', 'critical']) {
+    const faulty = ruleFor(css, `.k-level[data-state="${tone}"]`);
+    assert.match(faulty?.body ?? '', new RegExp(`background\\s*:[^;]*var\\(--k-color-${tone}\\)`), `a ${tone} level is not filled with its tone`);
+  }
+  const shaft = ruleFor(css, '.k-level::before')?.body ?? '';
+  assert.match(shaft, /content\s*:/, 'the shaft is not drawn');
+  assert.match(shaft, /background\s*:[^;]*var\(--k-color-accent\)/, 'the shaft is not lit beside a level reached');
+  assert.match(ruleFor(css, '.k-level[data-state="off"]::before')?.body ?? '', /background\s*:/, 'the shaft is lit beside a waiting level');
+});
+
 // corner-shape is not everywhere yet: the radius beside it is what other
 // browsers draw, so the frame never loses its corners.
 test('a board cuts its corners where the browser can and rounds them elsewhere, and its rows wrap on a phone', async () => {
