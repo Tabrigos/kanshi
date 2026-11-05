@@ -2,7 +2,7 @@
 name: kanshi
 description: Styles dashboards and monitoring screens as the monitor interfaces of 1990s Japanese mecha anime (amber signals on black glass, squeezed mincho title cards, hexagonal alarm grids, blinking alarms) with the Kanshi CSS theme, its k-* classes and --k-* design tokens, and an emergency mode that turns the screen red. Use when a page links the Kanshi stylesheets or uses k- classes, or the user builds a status board, a control-room or monitoring screen, an alarm panel or a retro sci-fi interface in plain HTML and CSS, even if they do not name the library. Read it instead of the library's source code.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Kanshi
@@ -57,7 +57,7 @@ pause (see "Rules and traps").
 | a status lamp | `.k-led` | a tone class; `data-off` for unlit; `.k-blink` |
 | a big number with its label and unit | `.k-metric` | `.k-metric-label`, `.k-metric-value`, `.k-metric-unit` |
 | a countdown, time or power left | `.k-countdown` and `.k-segments` | `data-low` on both; `data-on` on each lit segment |
-| several times of an incident or a maintenance window (expected recovery, time left, local time) | `.k-board` of `.k-board-row` | `.k-board-label` (Japanese, then English) and a `.k-countdown` in each row |
+| several times of an incident or a maintenance window (expected recovery, time left, local time) | `.k-board` of `.k-board-row` | `.k-board-label` (Japanese, then the page's language) and a `.k-countdown` in each row |
 | a gauge with caution and danger thresholds (disk, memory, queue) | `.k-segments` | `data-on` on each lit segment, its zone in `data-state` |
 | a time series | `svg.k-chart`, drawn by the page | `.k-chart-line`, `.k-chart-area`, `.k-chart-threshold` |
 | zones on a map, some in alarm | `svg.k-hexgrid` of `g.k-hex` | `data-state="critical"`, `data-state="off"`, `.k-hex-sub` |

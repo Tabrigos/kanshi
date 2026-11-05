@@ -5,6 +5,8 @@ All notable changes to Kanshi are recorded here, following
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-05
+
 ### Added
 
 - `k-banner`: the incident in progress, one word fitted to the full width (`k-banner-word`, an SVG as in the title card) between two `k-banner-line` lines of detail, inside striped accent bands with a critical rule each. It turns red in the emergency mode.

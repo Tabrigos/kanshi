@@ -4,7 +4,7 @@ Contents: [Stylesheets](#stylesheets) · [Page switches](#page-switches) ·
 [Shapes](#shapes) · [Tones](#tones) · [Data attributes](#data-attributes) ·
 [Custom properties](#custom-properties) · [Emergency mode](#emergency-mode)
 
-Every class, custom property and data attribute of Kanshi 0.2.0. A test
+Every class, custom property and data attribute of Kanshi 0.3.0. A test
 checks this file against the stylesheets: each name here exists, and each
 name of the stylesheets is here.
 
@@ -171,8 +171,12 @@ mincho; give it a tone.
 
 ### `.k-countdown`
 
-A large data-face number in the accent color; a `<small>` inside sets the
-fraction at 45%. `data-low` turns it critical.
+A large data-face number in the accent color: a time left, a time of day or
+an elapsed time, which the page updates. A `<small>` inside sets the
+fraction at 45%. `data-low` turns it critical when the time or the power
+left runs low; say so in words next to it too (the label, a `.k-chip`), since
+the color alone does not carry it and in the emergency mode the accent is red
+as well.
 
 ### `.k-board`
 
@@ -183,7 +187,7 @@ screen the label goes above the digits.
 
 - `.k-board-row`: one time.
 - `.k-board-label`: a `<span lang="ja">` in large mincho, then a `<span>`
-  with the English line in small capitals.
+  with the same label in the language of the page, in small capitals.
 
 ```html
 <div class="k-board">
@@ -274,8 +278,9 @@ One stage, with its piece of the shaft. The shape follows the state, as in
 the matrix: no `data-state` is the stage in progress, framed twice in the
 accent (give it `aria-current="step"` too); `data-state="off"` waits, dashed, its
 piece of shaft unlit; `ok`, `warning` and `critical` are finished, and a
-warning or a fault is also filled with its tone. The page writes the state in
-words.
+warning or a fault is also filled with its tone: `warning` for a stage that
+finished with trouble (retries, a slow step), `critical` for one that failed.
+The page writes the state in words.
 
 - `.k-level-id`: the number of the stage (LV 05).
 - `.k-level-name`: its name.

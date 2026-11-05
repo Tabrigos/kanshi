@@ -8,7 +8,7 @@ to tell you what is happening.
 
 **[Live demo](https://tabrigos.github.io/kanshi/)**
 
-> **Status: 0.2, not on the npm registry yet.** The palette is sampled from
+> **Status: 0.3, not on the npm registry yet.** The palette is sampled from
 > frames of the original series and of a film remake, and moved where
 > legibility asks for it. From this version on, a renamed class or token is
 > recorded in the changelog.
@@ -26,8 +26,9 @@ to tell you what is happening.
   background grid (`k-grid-bg`) and CRT layer (`k-fx` on the root), and the
   blink that stops when asked.
 - **`src/components.css`**: framework-free shapes, such as panel, tab, button,
-  chip, stamp, LED, ticker, metric, hazard band, title card, hex grid, vote,
-  countdown, threshold bars, chart, log, table and status matrix.
+  chip, stamp, LED, ticker, metric, hazard band, alarm banner, title card, hex
+  grid, vote, countdown, board of times, threshold bars, chart, log, table,
+  status matrix, levels and record card.
 - **`demo/index.html`**: every shape on one screen with moving sample data.
   Open it straight from the file system, or [online](https://tabrigos.github.io/kanshi/).
 
