@@ -238,6 +238,24 @@ test('a board cuts its corners where the browser can and rounds them elsewhere, 
   assert.match(row.body, /flex-wrap\s*:\s*wrap/, 'a row does not wrap its label above the value');
 });
 
+// The glow follows the stamp: only with k-fx. The bar code is decoration the
+// stylesheet draws, so an empty element needs its own size.
+test('a record card glows only with the effects on, crops its picture, and draws its bar code in the accent', async () => {
+  const css = (await stylesheets()).find((file) => file.name === 'src/components.css').css;
+  const card = ruleFor(css, '.k-record');
+  assert.ok(card, 'the .k-record rule was not found');
+  assert.match(card.body, /border\s*:[^;]*var\(--k-color-accent\)/, 'the frame is not accent');
+  const halos = rules(css).filter((rule) => /\.k-record(?![\w-])/.test(rule.selector) && /box-shadow\s*:/.test(rule.body));
+  assert.ok(halos.length >= 1, 'the halo of .k-record was not found');
+  assert.deepEqual(halos.filter((rule) => !/\.k-fx\b/.test(rule.selector)).map((rule) => `${rule.line} ${rule.selector}`), []);
+  assert.match(ruleFor(css, '.k-record-pic')?.body ?? '', /aspect-ratio\s*:/, 'the picture slot has no fixed shape');
+  assert.match(ruleFor(css, '.k-record-pic img')?.body ?? '', /object-fit\s*:\s*cover/, 'a picture is not cropped to its slot');
+  const code = ruleFor(css, '.k-record-code')?.body ?? '';
+  assert.match(code, /background(-image)?\s*:[^;]*repeating-linear-gradient\([^;]*var\(--k-color-accent\)/, 'the bar code is not drawn in the accent');
+  assert.match(code, /(^|[;\s])width\s*:/, 'the bar code has no width');
+  assert.match(code, /(^|[;\s])height\s*:/, 'the bar code has no height');
+});
+
 // The crosses sit on the cell of the line grid, so the two line up on a page
 // that uses both, and they replace the lines instead of adding to them.
 test('a cross grid keeps the cell of the line grid and draws crosses instead of its lines', async () => {

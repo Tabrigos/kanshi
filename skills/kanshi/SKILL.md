@@ -63,6 +63,7 @@ pause (see "Rules and traps").
 | zones on a map, some in alarm | `svg.k-hexgrid` of `g.k-hex` | `data-state="critical"`, `data-state="off"`, `.k-hex-sub` |
 | an event log, newest at the bottom | `.k-log` | `.k-log-tag`, `data-newest` on the last line |
 | a table of services or hosts | `.k-table` inside `.k-table-wrap` | a `.k-chip` or `.k-led` in a cell |
+| the detail of one host, user or device, opened from a list or a search | `.k-record` | `.k-record-pic`, `.k-record-name`, `.k-record-fields` (a `<dl>`), `.k-record-serial`, `.k-record-code` |
 | steps across several targets, such as a rollout by region | `table.k-matrix` | `.k-matrix-bar` in each cell, `data-state` on the cell |
 | the stages of one sequence, such as a migration, and how far it has gone | `ol.k-levels` of `li.k-level` | `.k-level-id`, `.k-level-name`, `.k-level-state`; `data-state` on the level, none on the one in progress |
 | a running line of news | `.k-ticker` holding `.k-ticker-track` | `--k-ticker-duration` |

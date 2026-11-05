@@ -33,7 +33,8 @@ preference; otherwise the element stays fully visible.
 ### `.k-fx`
 
 On `<html>`: static scanlines over the page (`--k-scanline`), a glow on
-`.k-glow` text and a halo around `.k-stamp`. Off unless the page opts in.
+`.k-glow` text and a halo around `.k-stamp` and `.k-record`. Off unless the
+page opts in.
 
 ### `.k-glow`
 
@@ -287,6 +288,43 @@ words.
   <li class="k-level" aria-current="step"><span class="k-level-id">LV 02</span><span class="k-level-name">Reindex</span><span class="k-level-state"><span lang="ja">進行</span> running</span></li>
   <li class="k-level" data-state="off"><span class="k-level-id">LV 03</span><span class="k-level-name">Switch</span><span class="k-level-state"><span lang="ja">待機</span> waiting</span></li>
 </ol>
+```
+
+### `.k-record`
+
+The card of one thing (a host, a user, a device), opened from a search or a
+click: a picture slot beside its name and fields, and a foot with a serial and
+a bar code, in an accent frame. Under `.k-fx` the frame glows. Its state goes
+in a field, as a `.k-chip`.
+
+- `.k-record-pic`: the picture slot, 3 by 4 and hatched: an `<img>` inside is
+  cropped to fill it, or a single glyph (a kanji) stands in for a picture.
+  Mark it `aria-hidden="true"` when it holds only a glyph.
+- `.k-record-name`: the name, in the mincho display face; a heading fits.
+- `.k-record-sub`: a short line under the name, such as an identifier.
+- `.k-record-fields`: a `<dl>` of fields, one `<dt>` and `<dd>` each.
+- `.k-record-foot`: the line across the bottom.
+- `.k-record-serial`: the serial number, in the data face.
+- `.k-record-code`: an empty element where the stylesheet draws a bar code.
+  It is decoration, the same on every card and never a code to scan: give it
+  `aria-hidden="true"`.
+
+```html
+<article class="k-record" aria-labelledby="record-name">
+  <div class="k-record-pic" aria-hidden="true">監</div>
+  <div>
+    <h3 class="k-record-name" id="record-name">Weekly audit</h3>
+    <div class="k-record-sub">CT-0417</div>
+    <dl class="k-record-fields">
+      <dt>Host</dt><dd>nas, rack 1</dd>
+      <dt>State</dt><dd><span class="k-chip k-tone-critical">Error</span></dd>
+    </dl>
+  </div>
+  <div class="k-record-foot">
+    <span class="k-record-serial">0000417</span>
+    <span class="k-record-code" aria-hidden="true"></span>
+  </div>
+</article>
 ```
 
 ## Tones

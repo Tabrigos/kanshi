@@ -404,3 +404,29 @@
 .k-level[data-state="off"] .k-level-name,
 .k-level[data-state="off"] .k-level-state { color: var(--k-color-text-dim); }
 .k-level[data-state="off"]::before { background: color-mix(in srgb, var(--k-color-border) 30%, transparent); }
+
+/* ——— record: the card of one thing (a host, a user, a device) opened from a
+   search or a click: a picture slot, a name, its fields, a serial and a bar
+   code. The bar code is decoration drawn by the stylesheet, the same on every
+   card, never a code to scan. The frame glows only with `k-fx`. ——— */
+.k-record { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: var(--k-space-3); padding: var(--k-space-3); border: 2px solid var(--k-color-accent); }
+.k-fx .k-record { box-shadow: 0 0 12px color-mix(in srgb, var(--k-color-accent) 35%, transparent), inset 0 0 12px color-mix(in srgb, var(--k-color-accent) 15%, transparent); }
+.k-record-pic { display: grid; place-items: center; aspect-ratio: 3 / 4; overflow: hidden; border: var(--k-frame-line) solid var(--k-color-accent); background: repeating-linear-gradient(45deg, var(--k-tint-accent) 0 2px, transparent 2px 7px); color: var(--k-color-accent); font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 3rem; line-height: 1; }
+.k-record-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.k-record-name { margin: 0; font-family: var(--k-font-family-display); font-weight: var(--k-font-weight-display); font-size: 1.6rem; line-height: 1.1; color: var(--k-color-accent); overflow-wrap: anywhere; }
+.k-record-sub { font-weight: var(--k-font-weight-ui); letter-spacing: 0.08em; text-transform: uppercase; color: var(--k-color-accent); }
+.k-record-fields { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px var(--k-space-2); margin: var(--k-space-2) 0 0; font-family: var(--k-font-family-data); font-size: var(--k-font-size-caption); }
+.k-record-fields dt { color: var(--k-color-text-dim); text-transform: uppercase; }
+.k-record-fields dd { margin: 0; color: var(--k-color-text); overflow-wrap: anywhere; }
+.k-record-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--k-space-2); padding-top: var(--k-space-2); border-top: var(--k-frame-line) solid var(--k-color-border); }
+.k-record-serial { font-family: var(--k-font-family-data); font-size: 1.1rem; letter-spacing: 0.12em; font-variant-numeric: tabular-nums; color: var(--k-color-accent); }
+.k-record-code {
+  display: block;
+  width: 140px;
+  max-width: 100%;
+  height: 28px;
+  background:
+    repeating-linear-gradient(90deg, var(--k-color-accent) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, var(--k-color-accent) 0 2px, transparent 2px 9px),
+    repeating-linear-gradient(90deg, var(--k-color-accent) 0 3px, transparent 3px 17px);
+}
